@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Kullanılan galeri resimleri
+
 const images = [
   'gallery1.png',
   'gallery2.png',
