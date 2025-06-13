@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import { ChevronLeft, ChevronRight, User, Mail, Phone } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  User,
+  Mail,
+  Phone,
+  Loader
+} from "lucide-react";
 import "react-calendar/dist/Calendar.css";
 import "./BookingPage.css";
 
 import { useTranslation } from "react-i18next";
+import useIsMobile from "../hooks/useIsMobile"; // daha önce oluşturduğun hook
 
-const SHEETY_BLOCKED = import.meta.env.VITE_SHEETY_BLOCKED;
-const SHEETY_RESERVE = import.meta.env.VITE_SHEETY_RESERVATIONS;
-
-const BookingPage = () => {
+export default function BookingPage() {
   const { t, i18n } = useTranslation();
+  const isMobile = useIsMobile();
 
   const [blockedDates, setBlockedDates] = useState([]);
   const [range, setRange] = useState([null, null]);
@@ -20,26 +26,28 @@ const BookingPage = () => {
     soyad: "",
     email: "",
     telefon: "",
-    notlar: "",
+    notlar: ""
   });
 
+  // feedback: { type, message } veya null
+  const [feedback, setFeedback] = useState(null);
+
   useEffect(() => {
-    fetch(SHEETY_BLOCKED)
-      .then((res) => res.json())
-      .then((data) => {
-        const rawList = data.blockedDays ?? [];
-        const parseDateLocal = (str) => {
+    fetch(import.meta.env.VITE_SHEETY_BLOCKED)
+      .then(res => res.json())
+      .then(data => {
+        const parse = str => {
           const [y, m, d] = str.split("-").map(Number);
           return new Date(y, m - 1, d);
         };
-        const parsed = rawList.map((item) => parseDateLocal(item.date));
-        setBlockedDates(parsed);
+        setBlockedDates((data.blockedDays || []).map(item => parse(item.date)));
       })
-      .catch((err) => console.error("Fetch blocked dates error:", err));
+      .catch(console.error);
   }, []);
 
   const tileDisabled = ({ date, view }) =>
-    view === "month" && blockedDates.some((d) => d.toDateString() === date.toDateString());
+    view === "month" &&
+    blockedDates.some(d => d.toDateString() === date.toDateString());
 
   const tileClassName = ({ date, view }) => {
     if (view !== "month") return "";
@@ -52,48 +60,58 @@ const BookingPage = () => {
       if (date > min && date < max) return "in-range-hover";
     }
     if (start && end && date > start && date < end) return "in-range";
-    if (blockedDates.some((d) => d.toDateString() === date.toDateString()))
+    if (blockedDates.some(d => d.toDateString() === date.toDateString()))
       return "unavailable";
     return "available";
   };
 
-  const onChangeField = (e) => {
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
+  const showFeedback = (type, message) => {
+    setFeedback({ type, message });
+    setTimeout(() => setFeedback(null), 3000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
+    showFeedback("loading", t("booking.submitting"));
     const [checkIn, checkOut] = range;
-    fetch(SHEETY_RESERVE, {
+    fetch(import.meta.env.VITE_SHEETY_RESERVATIONS, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         reservation: {
           checkIn: checkIn.toISOString().split("T")[0],
           checkOut: checkOut.toISOString().split("T")[0],
-          ...form,
-        },
-      }),
+          ...form
+        }
+      })
     })
-      .then((res) => res.json())
-      .then(() => alert(t("booking.alertSuccess")))
-      .catch(() => alert(t("booking.alertError")));
+      .then(res => {
+        if (!res.ok) throw new Error();
+        return res.json();
+      })
+      .then(() => showFeedback("success", t("booking.alertSuccess")))
+      .catch(() => showFeedback("error", t("booking.alertError")));
   };
 
-  // react-calendar expects a locale code string
   const localeCode = i18n.language === "en" ? "en-US" : "tr";
 
   return (
     <div id="rezervasyon" className="booking-page-wrapper max-w-5xl mx-auto p-6 space-y-12">
-      {/* Availability Calendar */}
+      {feedback && (
+        <div className="feedback-overlay">
+          {feedback.type === "loading" && <Loader className="spinner" />}
+          <p className="feedback-message">{feedback.message}</p>
+        </div>
+      )}
+
+      {/* Takvim */}
       <section className="relative booking-glass">
-        <div className="bg-white/30 backdrop-blur-sm border border-white/40 rounded-3xl p-8 shadow-2xl">
+        <div className="glass-container p-8">
           <h2 className="text-2xl font-semibold">{t("booking.calendarTitle")}</h2>
           <Calendar
             selectRange
             locale={localeCode}
-            onChange={(value) => {
+            onChange={value => {
               if (!Array.isArray(value)) {
                 setRange([value, null]);
                 setHoverDate(null);
@@ -108,21 +126,20 @@ const BookingPage = () => {
             onMouseLeave={() => setHoverDate(null)}
             prevLabel={<ChevronLeft />}
             nextLabel={<ChevronRight />}
-            showDoubleView
+            showDoubleView={!isMobile}
             next2Label={null}
             prev2Label={null}
           />
         </div>
       </section>
 
-      {/* Reservation Form */}
+      {/* Form */}
       <section className="relative booking-glass">
-        <div className="bg-white/30 backdrop-blur-sm border border-white/40 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="glass-container overflow-hidden">
           <div className="bg-teal-600 text-white py-4 px-6">
             <h2 className="text-xl font-semibold">{t("booking.formTitle")}</h2>
           </div>
           <div className="p-8">
-            {/* Date Info */}
             <div className="booking-info mb-6">
               <h3 className="text-lg font-bold mb-2">{t("booking.datesTitle")}</h3>
               <p>
@@ -145,7 +162,7 @@ const BookingPage = () => {
                   { name: "ad", icon: User, placeholder: t("booking.firstName"), required: true },
                   { name: "soyad", icon: User, placeholder: t("booking.lastName"), required: true },
                   { name: "email", icon: Mail, placeholder: t("booking.email"), required: true },
-                  { name: "telefon", icon: Phone, placeholder: t("booking.phone"), required: false },
+                  { name: "telefon", icon: Phone, placeholder: t("booking.phone"), required: false }
                 ].map(({ name, icon: Icon, placeholder, required }) => (
                   <div className="relative" key={name}>
                     <Icon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -154,7 +171,7 @@ const BookingPage = () => {
                       type={name === "email" ? "email" : "text"}
                       placeholder={placeholder}
                       value={form[name]}
-                      onChange={onChangeField}
+                      onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
                       required={required}
                       className="w-full pl-10 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400"
                     />
@@ -163,13 +180,15 @@ const BookingPage = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-1">{t("booking.notesLabel")}</label>
+                <label className="block text-sm font-bold mb-1">
+                  {t("booking.notesLabel")}
+                </label>
                 <textarea
                   name="notlar"
                   rows={4}
                   placeholder={t("booking.notesPlaceholder")}
                   value={form.notlar}
-                  onChange={onChangeField}
+                  onChange={e => setForm(f => ({ ...f, notlar: e.target.value }))}
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400"
                 />
               </div>
@@ -178,7 +197,7 @@ const BookingPage = () => {
 
               <button
                 type="submit"
-                className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition-shadow shadow-md"
+                className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 shadow-md transition-shadow"
               >
                 {t("booking.submitButton")}
               </button>
@@ -188,6 +207,4 @@ const BookingPage = () => {
       </section>
     </div>
   );
-};
-
-export default BookingPage;
+}

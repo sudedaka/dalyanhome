@@ -173,6 +173,7 @@
     "notesPlaceholder": "Eklemek istediğiniz notlar",
     "formInfo":      "Rezervasyon talebiniz tarafımıza iletilecektir. Bu adımda sizden ödeme talep edilmeyecektir. Geri dönüş yapılacaktır.",
     "submitButton":  "Rezervasyon Talebi Gönder",
+    "submitting": "Rezervasyon gönderiliyor…",
     "alertSuccess":  "Rezervasyon talebiniz iletildi. Teşekkürler!",
     "alertError":    "Rezervasyon gönderilirken bir hata oluştu."
   }

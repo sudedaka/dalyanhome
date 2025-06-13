@@ -173,6 +173,7 @@
         "notesPlaceholder": "Any Notes You Want to Add",
         "formInfo": "Your reservation request will be forwarded to us. You will not be asked for payment at this step. You will be contacted.",
         "submitButton": "Send Reservation Request",
+        "submitting": "Sending reservation…",
         "alertSuccess": "Your reservation request has been forwarded. Thank you!",
         "alertError": "An error occurred while sending the reservation."
         }
