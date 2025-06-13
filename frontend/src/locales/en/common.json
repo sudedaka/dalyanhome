@@ -1,0 +1,179 @@
+{
+  "home": "Home",
+  "gallery.nav": "Gallery",
+  "information": "Information",
+  "contact": "Contact",
+  "reservation": "Reservation",
+
+  "hero.title": "Tranquility in Nature’s Heart",
+  "hero.subtitle": "A retreat just for you, far from the city.",
+
+  "features.sectionTitle": "Featured Activities",
+  "features.items": [
+    {
+      "title": "Nature Walk",
+      "description": "Enjoy a nature walk along green trails.",
+      "color": "text-teal-600"
+    },
+    {
+      "title": "Stargazing",
+      "description": "Experience the clear night sky full of stars.",
+      "color": "text-black"
+    },
+    {
+      "title": "Pool Fun",
+      "description": "Swim in our refreshing pool on hot days.",
+      "color": "text-blue-500"
+    },
+    {
+      "title": "Yoga & Meditation",
+      "description": "Relax your mind and body at sunrise or sunset.",
+      "color": "text-yellow-400"
+    },
+    {
+      "title": "Reading with Birdsong",
+      "description": "Lose yourself in a book accompanied by birdsong.",
+      "color": "text-green-600"
+    },
+    {
+      "title": "Outdoor Fireplace Evening",
+      "description": "Create unforgettable moments around the fire.",
+      "color": "text-red-500"
+    }
+  ],
+
+  "info": {
+    "sectionTitle": "About Your Stay",
+    "paragraphs": [
+      "Nestled between Dalyan and Ortaca in Okçular Village, our private detached house with an open-plan living area offers families a secluded holiday villa with a pool, immersed in nature for a peaceful getaway.",
+      "Feel at home in this accommodation, ideal for families with children and groups of friends. With a master bedroom, a children’s room, and a fully equipped kitchen, you can enjoy a comfortable vacation. The garden and pool are completely private, ensuring your full privacy.",
+      "Designed for vacationers; there is absolutely no outside interference in your private space. Perfect for honeymooners, nuclear families, and friend groups.",
+      "There is one double bed and two single beds; the sofas in the living room are also suitable for sleeping. The children’s room and open-plan kitchen living area offer pool views, while the double bedroom overlooks nature. One bathroom is available. No parking issues.",
+      "Fully equipped kitchen: all necessary appliances you may need (cutlery, plates, pots, serving dishes and glasses, etc.), refrigerator, oven, stove, kettle, toaster, washing machine, dishwasher, iron, ironing board, and vacuum cleaner.",
+      "Our villa features an 8×4 m pool with a depth of 1.55 m, including a children’s pool, outdoor shower, barbecue area, 4 sun loungers, and garden seating. There is also a swing in the garden.",
+      "Fresh towels are provided in sufficient quantity. For hygiene, we recommend bringing your own soap and shampoo.",
+      "You can place orders via major supermarket apps. Other necessities can be met in the Ortaca town center."
+    ],
+    "rooms": {
+      "parent": {
+        "title": "Master Bedroom",
+        "desc": "Comfortable room with a double bed and en-suite bathroom."
+      },
+      "child": {
+        "title": "Children’s Room",
+        "desc": "Two single beds, air conditioning, and pool view."
+      }
+    },
+    "kitchen": {
+      "title": "Fully Equipped Kitchen & Living Area",
+      "items": [
+        "All kitchen appliances (cutlery, plates, pots, serving dishes and glasses, etc.)",
+        "Refrigerator, oven, stove, kettle",
+        "Washing machine & dishwasher, iron, ironing board, vacuum cleaner",
+        "Seating area, flat-screen TV, air conditioning",
+        "Kitchen island with bar stools"
+      ]
+    },
+    "amenities": [
+      "Free Wi-Fi",
+      "Netflix Subscription",
+      "Private Parking",
+      "Air Conditioning (All Areas)",
+      "Dalyan Okçular Area",
+      "Complete Privacy",
+      "Up to 6 Guests",
+      "Outdoor Shower",
+      "Barbecue & Fireplace Area",
+      "Garden Seating & Swing"
+    ],
+    "location": {
+      "title": "Location & Distances",
+      "distances": {
+        "dalyan": "Dalyan Center: 4 km",
+        "ortaca": "Ortaca Center: 8 km",
+        "sarıgerme": "Sarıgerme Beach: 10 km",
+        "iztuzu": "İztuzu (Turtle) Beach: 15 km",
+        "dalaman": "Dalaman Airport: 15 km",
+        "göcek": "Göcek: 20 km",
+        "fethiye": "Fethiye: 45 km",
+        "akyaka": "Akyaka: 55 km"
+      }
+    },
+    "activities": {
+      "title": "What to Do in Muğla",
+      "items": [
+        "Scuba Diving",
+        "Mud Bath & Thermal Springs",
+        "Canoe Tours",
+        "Exploring Ancient Ruins",
+        "Trekking on the Lycian Way",
+        "Visit Saklıkent Canyon",
+        "Butterfly Valley Boat Trip",
+        "Jeep Safari & Nature Tours",
+        "Paragliding in Ölüdeniz"
+      ]
+    },
+    "pool": {
+      "title": "Pool Features",
+      "desc": "An 8×4 m pool with a depth of 1.55 m including a children’s section. Four sun loungers and large umbrellas available."
+    },
+    "notes": {
+      "title": "Important Notes",
+      "items": [
+        "A cleaning fee applies.",
+        "Pets are not allowed.",
+        "Smoking indoors is prohibited."
+      ]
+    }
+  },
+
+  "gallery.section": {
+    "title": "Gallery",
+    "alt": "Gallery image #{{number}}",
+    "thumbnailAlt": "Thumbnail #{{number}}",
+    "prev": "Previous image",
+    "next": "Next image"
+  },
+
+    "footer": {
+        "aboutTitle": "About",
+        "about": "DalyanHome offers a tranquil, secure holiday experience in our private villa with pool, nestled in Okçular Village for families and friend groups.",
+        "linksTitle": "Quick Links",
+        "links": ["Home", "Information", "Gallery", "Reservation", "Contact"],
+        "activitiesTitle": "Activities",
+        "activities": [
+          "Scuba Diving",
+          "Mud Bath & Thermal Springs",
+          "Boat Tours",
+          "Trekking on the Lycian Way",
+          "Paragliding in Ölüdeniz"
+        ],
+        "contactTitle": "Contact",
+        "contact": {
+          "address": "Okçular Village, Dalyan / Muğla",
+          "phone": "+905536084504",
+          "email": "batuhan_daka@hotmail.com",
+          "instagram": "@daly.anhome",
+          "instagramUrl": "https://www.instagram.com/daly.anhome"
+        },
+        "copy": "© 2025 DalyanHome. All rights reserved."
+      },
+
+        "booking": {
+        "calendarTitle": "Availability Calendar",
+        "formTitle": "Reservation Request",
+        "datesTitle": "Date Information",
+        "checkIn": "Check-in Date",
+        "checkOut": "Check-out Date",
+        "firstName": "Your Name",
+        "lastName": "Your Surname",
+        "email": "Your Email Address",
+        "phone": "Telephone",
+        "notesLabel": "Notes",
+        "notesPlaceholder": "Any Notes You Want to Add",
+        "formInfo": "Your reservation request will be forwarded to us. You will not be asked for payment at this step. You will be contacted.",
+        "submitButton": "Send Reservation Request",
+        "alertSuccess": "Your reservation request has been forwarded. Thank you!",
+        "alertError": "An error occurred while sending the reservation."
+        }
+}

@@ -1,0 +1,179 @@
+{
+  "home": "Anasayfa",
+  "gallery.nav": "Galeri",
+  "information": "Bilgi",
+  "contact": "İletişim",
+  "reservation": "Rezervasyon",
+
+  "hero.title": "Doğanın Kalbinde Sakinlik",
+  "hero.subtitle": "Şehirden uzak, sadece size ait bir mola.",
+
+  "features.sectionTitle": "Öne Çıkan Aktiviteler",
+  "features.items": [
+    {
+      "title": "Doğada yürüyüş",
+      "description": "Yeşil patikalarda doğa yürüyüşü yapın.",
+      "color": "text-teal-600"
+    },
+    {
+      "title": "Gece yıldız izleme",
+      "description": "Gökyüzünün berraklığıyla yıldızların tadını çıkarın.",
+      "color": "text-black"
+    },
+    {
+      "title": "Havuz Keyfi",
+      "description": "Sıcak günlerde serin havuzumuzda yüzme keyfi yaşayın.",
+      "color": "text-blue-500"
+    },
+    {
+      "title": "Yoga & Meditasyon",
+      "description": "Gün doğumunda veya gün batımında zihin ve bedeninizi dinlendirin.",
+      "color": "text-yellow-400"
+    },
+    {
+      "title": "Kuş sesleri eşliğinde kitap okuma",
+      "description": "Doğanın melodisi eşliğinde sayfalar arasında kaybolun.",
+      "color": "text-green-600"
+    },
+    {
+      "title": "Dışarıda Şömine Akşamı",
+      "description": "Ateşin başında sıcak sohbetlerle unutulmaz anlar.",
+      "color": "text-red-500"
+    }
+  ],
+
+  "info": {
+    "sectionTitle": "Konaklama Hakkında",
+    "paragraphs": [
+      "Dalyan ve Ortaca arasında, Okçular Köyü’ndeki 2+1 Amerikan mutfak konfigürasyonlu, ailelere özel korunaklı havuzlu müstakil evimiz doğa içinde, şehirden uzak sakin bir tatil deneyimi sunar.",
+      "Eviniz gibi hissedeceğiniz bu konaklama, hem çocuklu aileler hem de arkadaş grupları için idealdir. Ebeveyn odası, çocuk odası ve tam donanımlı mutfak ile konforlu bir tatil imkanı sunar. Evin bahçesi ve havuzu dışarıdan hiçbir şekilde görünmemektedir, böylece tam gizlilik içinde tatilin tadını çıkarabilirsiniz.",
+      "Tatilciler için tasarlanmıştır; özel alanınıza dışarıdan müdahale kesinlikle mümkün değildir. Balayı çiftleri, çekirdek aileler ve arkadaş grupları için uygundur.",
+      "1 çift kişilik ve 2 tek kişilik yatak mevcuttur; salondaki koltuklar da konaklama için uygundur. İki tek kişilik yataklı oda ve Amerikan mutfaklı salon kısmı havuz manzaralı, 1 çift kişilik oda ise doğa manzaralıdır. 1 adet banyo bulunmaktadır. Otopark sorunu yoktur.",
+      "Tam donanımlı mutfak: tüm tatil boyunca ihtiyaç duyacağınız mutfak aparatları (çatal-bıçak, tabak, tencere, sunum tabak ve bardaklar vb.), buzdolabı, fırın, ocak, kettle, tost makinesi, çamaşır ve bulaşık makinesi, ütü, ütü masası, süpürge mevcuttur.",
+      "Villamız 8×4 m boyutlarında ve 1.55 m derinliğinde bir havuza sahiptir; ayrıca çocuk havuzu, açık alan duşu, barbekü alanı, 4 adet şezlong ve bahçe oturma grupları bulunmaktadır. Bahçede salıncak da yer almaktadır.",
+      "Yeterli sayıda temiz el havlusu temin edilmektedir. Hijyeniniz için kendi sabun ve şampuanlarınızı getirmenizi öneriyoruz.",
+      "Büyük marketlerin sanal uygulamaları üzerinden sipariş verebilirsiniz. Diğer ihtiyaçlarınızı Ortaca ilçe merkezinden karşılayabilirsiniz."
+    ],
+    "rooms": {
+      "parent": {
+        "title": "Ebeveyn Odası",
+        "desc": "Çift kişilik yatak, klimalı ve doğa manzaralı konforlu oda."
+      },
+      "child": {
+        "title": "Çocuk Odası",
+        "desc": "İki tek kişilik yatak, klimalı ve havuz manzaralı konforlu oda."
+      }
+    },
+    "kitchen": {
+      "title": "Tam Donanımlı Mutfak & Salon",
+      "items": [
+        "Tüm mutfak aparatları (çatal-bıçak, tabak, tencere, sunum tabak ve bardaklar vb.)",
+        "Buzdolabı, fırın, ocak, kettle",
+        "Çamaşır & bulaşık makinesi, ütü, ütü masası, süpürge",
+        "Oturma grubu, plazma TV, klima, kitaplık",
+        "Bar tabureleriyle çevrili ada mutfak"
+      ]
+    },
+    "amenities": [
+      "Ücretsiz Wi-Fi",
+      "Netflix Üyeliği",
+      "Özel otopark",
+      "Klima (Tüm Alanlar)",
+      "Dalyan Okçular Mevkii",
+      "Tam Gizlilik",
+      "Maksimum 6 Kişi",
+      "Açık hava duşu",
+      "Barbekü & Şömine Alanı",
+      "Bahçe Oturma Grubu & Salıncak"
+    ],
+    "location": {
+      "title": "Konum & Mesafeler",
+      "distances": {
+        "dalyan": "Dalyan Merkez: 4 km",
+        "ortaca": "Ortaca Merkez: 8 km",
+        "sarıgerme": "Sarıgerme Plajı: 10 km",
+        "iztuzu": "İztuzu (Kaplumbağa) Plajı: 15 km",
+        "dalaman": "Dalaman Havalimanı: 15 km",
+        "göcek": "Göcek: 20 km",
+        "fethiye": "Fethiye: 45 km",
+        "akyaka": "Akyaka: 55 km"
+      }
+    },
+    "activities": {
+      "title": "Muğla’da Yapabilecekleriniz",
+      "items": [
+        "Su Dalışı",
+        "Dalyan Çamur Banyosu ve Sıcak Su Kaynakları",
+        "Kano Turu",
+        "Antik Kentleri Gezmek",
+        "Likya Yolu’nda Trekking",
+        "Saklıkent Kanyonu Gezisi",
+        "Butterfly Valley Tekne Turu",
+        "Jeep Safari & Doğa Turları",
+        "Ölüdeniz’de Yamaç Paraşütü"
+      ]
+    },
+    "pool": {
+      "title": "Havuz Özellikleri",
+      "desc": "8×4 m boyutlarında, 1.55 m derinliğinde ve çocuk havuzu dahil olmak üzere kapsamlı yüzme imkânı. Çevrede 4 adet şezlong ve geniş şemsiyeler bulunmaktadır."
+    },
+    "notes": {
+      "title": "Önemli Notlar",
+      "items": [
+        "Temizlik ücreti bulunmaktadır.",
+        "Evcil hayvan kabul edilmemektedir.",
+        "İç mekânda sigara içmek yasaktır."
+      ]
+    }
+  },
+
+  "gallery.section": {
+    "title": "Galeri",
+    "alt": "Galerinin {{number}}. görseli",
+    "thumbnailAlt": "{{number}}. küçük önizleme",
+    "prev": "Önceki görsel",
+    "next": "Sonraki görsel"
+  },
+
+   "footer": {
+    "aboutTitle": "Hakkımızda",
+    "about": "DalyanHome, Okçular Köyü’nde ailelere ve arkadaş gruplarına özel, korunaklı havuzlu müstakil villamızda doğayla iç içe, huzurlu bir tatil deneyimi sunuyor.",
+    "linksTitle": "Hızlı Linkler",
+    "links": ["Anasayfa", "Bilgi", "Galeri", "Rezervasyon", "İletişim"],
+    "activitiesTitle": "Aktiviteler",
+    "activities": [
+      "Su Dalışı",
+      "Çamur Banyosu & Sıcak Su Kaynakları",
+      "Tekne Turları",
+      "Likya Yolu’nda Trekking",
+      "Ölüdeniz’de Yamaç Paraşütü"
+    ],
+    "contactTitle": "İletişim",
+    "contact": {
+      "address": "Okçular Köyü, Dalyan / Muğla",
+      "phone": "+905536084504",
+      "email": "batuhan_daka@hotmail.com",
+      "instagram": "@daly.anhome",
+      "instagramUrl": "https://www.instagram.com/daly.anhome"
+    },
+    "copy": "© 2025 DalyanHome. Tüm hakları saklıdır."
+  },
+
+   "booking": {
+    "calendarTitle": "Müsaitlik Takvimi",
+    "formTitle":     "Rezervasyon Talebi",
+    "datesTitle":    "Tarih Bilgileri",
+    "checkIn":       "Giriş Tarihi",
+    "checkOut":      "Çıkış Tarihi",
+    "firstName":     "Adınız",
+    "lastName":      "Soyadınız",
+    "email":         "Email adresiniz",
+    "phone":         "Telefon",
+    "notesLabel":    "Notlar",
+    "notesPlaceholder": "Eklemek istediğiniz notlar",
+    "formInfo":      "Rezervasyon talebiniz tarafımıza iletilecektir. Bu adımda sizden ödeme talep edilmeyecektir. Geri dönüş yapılacaktır.",
+    "submitButton":  "Rezervasyon Talebi Gönder",
+    "alertSuccess":  "Rezervasyon talebiniz iletildi. Teşekkürler!",
+    "alertError":    "Rezervasyon gönderilirken bir hata oluştu."
+  }
+}

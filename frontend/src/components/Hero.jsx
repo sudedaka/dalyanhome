@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <section
       id="anasayfa"
@@ -11,10 +14,10 @@ const Hero = () => {
 
       <div className="relative z-10 text-center text-white px-6 max-w-3xl">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 leading-tight">
-          Doğanın Kalbinde Sakinlik
+          {t("hero.title")}
         </h1>
         <p className="text-base sm:text-lg md:text-xl font-sans text-white/90">
-          Şehirden uzak, sadece size ait bir mola.
+          {t("hero.subtitle")}
         </p>
       </div>
     </section>
