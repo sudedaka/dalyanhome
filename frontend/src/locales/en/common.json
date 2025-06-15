@@ -51,8 +51,9 @@
       "There is one double bed and two single beds; the sofas in the living room are also suitable for sleeping. The children’s room and open-plan kitchen living area offer pool views, while the double bedroom overlooks nature. One bathroom is available. No parking issues.",
       "Fully equipped kitchen: all necessary appliances you may need (cutlery, plates, pots, serving dishes and glasses, etc.), refrigerator, oven, stove, kettle, toaster, washing machine, dishwasher, iron, ironing board, and vacuum cleaner.",
       "Our villa features an 8×4 m pool with a depth of 1.55 m, including a children’s pool, outdoor shower, barbecue area, 4 sun loungers, and garden seating. There is also a swing in the garden.",
-      "Fresh towels are provided in sufficient quantity. For hygiene, we recommend bringing your own soap and shampoo.",
-      "You can place orders via major supermarket apps. Other necessities can be met in the Ortaca town center."
+      "All bedrooms have towels and blankets for the number of people. We recommend that you bring your own soap and shampoo for your hygiene.",
+      "You can place orders via major supermarket apps. Other necessities can be met in the Ortaca town center.",
+      "The garden and pool are cleaned meticulously after each customer."
     ],
     "rooms": {
       "parent": {
@@ -68,7 +69,7 @@
       "title": "Fully Equipped Kitchen & Living Area",
       "items": [
         "All kitchen appliances (cutlery, plates, pots, serving dishes and glasses, etc.)",
-        "Refrigerator, oven, stove, kettle",
+        "Refrigerator, oven, stove, kettle,toaster",
         "Washing machine & dishwasher, iron, ironing board, vacuum cleaner",
         "Seating area, flat-screen TV, air conditioning",
         "Kitchen island with bar stools"

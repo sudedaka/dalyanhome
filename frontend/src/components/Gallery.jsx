@@ -5,9 +5,11 @@ import { useTranslation } from 'react-i18next';
 const images = [
   'gallery1.png',
   'gallery2.png',
-  'gallery3.png',
+  'gallery3.jpeg',
   'gallery4.jpeg',
-  'gallery5.jpeg',
+  'gallery5.png',
+  "gallery6.jpeg",
+  "gallery7.jpeg",
 ];
 
 const Gallery = () => {

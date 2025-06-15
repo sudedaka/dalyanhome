@@ -1,12 +1,8 @@
-/* BookingPage.css */
-
-/* 1) Genel Wrapper */
 .booking-page-wrapper {
   position: relative;
   overflow: hidden;
 }
 
-/* 2) Feedback Overlay */
 .feedback-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -33,7 +29,7 @@
   padding: 0 1rem;
 }
 
-/* 3) Cam Kartı */
+
 .booking-glass .glass-container {
   backdrop-filter: blur(8px);
   background-color: rgba(255,255,255,0.3);
@@ -42,7 +38,7 @@
   padding: 2rem;
 }
 
-/* 4) React Calendar Temel */
+
 .booking-glass .glass-container .react-calendar {
   background: transparent !important;
   border: none !important;
@@ -50,7 +46,7 @@
   max-width: none !important;
   box-sizing: border-box;
 }
-/* Masaüstü: iki ay yan yana */
+
 .booking-glass .glass-container .react-calendar--doubleView .react-calendar__viewContainer {
   display: flex;
   gap: 1.5rem;
@@ -59,7 +55,7 @@
   flex: 1;
 }
 
-/* Navigation */
+
 .booking-glass .glass-container .react-calendar__navigation {
   display: flex;
   justify-content: center;
@@ -76,14 +72,14 @@
   color: #06b6d4;
 }
 
-/* Weekdays */
+
 .booking-glass .glass-container .react-calendar__month-view__weekdays__weekday {
   text-transform: uppercase;
   font-size: 0.75rem;
   color: #06b6d4;
 }
 
-/* Tiles */
+
 .booking-glass .glass-container .react-calendar__tile {
   border-radius: 0.5rem;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -106,7 +102,7 @@
   pointer-events: none;
 }
 
-/* 5) Tarih Bilgileri */
+
 .booking-info {
   margin: 1.5rem 0;
 }
@@ -120,12 +116,11 @@
   margin: 0.25rem 0;
 }
 
-/* 6) Form & İkon Ayarları */
 .booking-glass input,
 .booking-glass textarea {
   border: 1px solid #d1d5db;
   border-radius: 0.375rem;
-  padding: 0.5rem 0.5rem 0.5rem 2.75rem; /* soldan boşluk ikona yer açar */
+  padding: 0.5rem 0.5rem 0.5rem 2.75rem; 
   width: 100%;
   box-sizing: border-box;
   position: relative;
@@ -135,7 +130,7 @@
   outline: none;
   box-shadow: 0 0 0 2px rgba(6,182,212,0.6);
 }
-/* İkonları input’un önüne yerleştirirken yazıyla çakışmasınlar */
+
 .booking-glass .relative svg {
   position: absolute;
   z-index: 10;
@@ -146,14 +141,14 @@
   pointer-events: none;
 }
 
-/* 7) Responsive */
+
 @media (max-width: 768px) {
-  /* Tek sütuna düşür: takvim de form da */
+
   .booking-glass .glass-container .react-calendar--doubleView .react-calendar__viewContainer {
     flex-direction: column;
     gap: 1rem;
   }
-  /* calendar fontu biraz küçültebiliriz */
+
   .booking-glass .glass-container .react-calendar {
     font-size: 0.9rem;
   }
