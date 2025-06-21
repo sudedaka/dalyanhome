@@ -128,13 +128,24 @@
     }
   },
 
-  "gallery.section": {
-    "title": "Galeri",
-    "alt": "Galerinin {{number}}. görseli",
-    "thumbnailAlt": "{{number}}. küçük önizleme",
-    "prev": "Önceki görsel",
-    "next": "Sonraki görsel"
-  },
+    "gallery": {
+      "nav": "Galeri",
+      "categories": {
+        "garden": "Bahçe",
+        "livingRoom": "Salon",
+        "kidsRoom": "Çocuk Odası",
+        "parentBedroom": "Ebeveyn Odası",
+        "bathroom": "Banyo"
+      },
+      "section": {
+        "title": "Galeri",
+        "alt": "Galerinin {{number}}. görseli",
+        "thumbnailAlt": "{{number}}. küçük önizleme",
+        "prev": "Önceki görsel",
+        "next": "Sonraki görsel"
+      }
+    },
+
 
    "footer": {
     "aboutTitle": "Hakkımızda",

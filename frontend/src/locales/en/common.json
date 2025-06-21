@@ -128,13 +128,24 @@
     }
   },
 
-  "gallery.section": {
-    "title": "Gallery",
-    "alt": "Gallery image #{{number}}",
-    "thumbnailAlt": "Thumbnail #{{number}}",
-    "prev": "Previous image",
-    "next": "Next image"
-  },
+      "gallery": {
+        "nav": "Gallery",
+        "categories": {
+          "garden": "Garden",
+          "livingRoom": "Living Room",
+          "kidsRoom": "Kids Room",
+          "parentBedroom": "Parent Bedroom",
+          "bathroom": "Bathroom"
+        },
+        "section": {
+          "title": "Gallery",
+          "alt": "Gallery image #{{number}}",
+          "thumbnailAlt": "Thumbnail #{{number}}",
+          "prev": "Previous image",
+          "next": "Next image"
+        }
+      },
+
 
     "footer": {
         "aboutTitle": "About",
