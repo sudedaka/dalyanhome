@@ -5,7 +5,7 @@
   "contact": "Contact",
   "reservation": "Reservation",
 
-  "hero.title": "Tranquility in Nature’s Heart",
+  "hero.title": "Peace in the Heart of Nature",
   "hero.subtitle": "A retreat just for you, far from the city.",
 
   "features.sectionTitle": "Featured Activities",
@@ -187,6 +187,8 @@
         "submitButton": "Send Reservation Request",
         "submitting": "Sending reservation…",
         "alertSuccess": "Your reservation request has been forwarded. Thank you!",
-        "alertError": "An error occurred while sending the reservation."
+        "alertError": "An error occurred while sending the reservation.",
+        "validationError": "Please fill in all mandatory fields and dates."
+
         }
 }

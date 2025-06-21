@@ -12,7 +12,7 @@ import "react-calendar/dist/Calendar.css";
 import "./BookingPage.css";
 
 import { useTranslation } from "react-i18next";
-import useIsMobile from "../hooks/useIsMobile"; // daha önce oluşturduğun hook
+import useIsMobile from "../hooks/useIsMobile";
 
 export default function BookingPage() {
   const { t, i18n } = useTranslation();
@@ -29,7 +29,6 @@ export default function BookingPage() {
     notlar: ""
   });
 
-  // feedback: { type, message } veya null
   const [feedback, setFeedback] = useState(null);
 
   useEffect(() => {
@@ -71,16 +70,26 @@ export default function BookingPage() {
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
-    showFeedback("loading", t("booking.submitting"));
-    const [checkIn, checkOut] = range;
+  e.preventDefault();
+
+  const [checkIn, checkOut] = range;
+
+  // ❗ Tarih ve zorunlu alan kontrolü
+  if (!checkIn || !checkOut || !form.ad.trim() || !form.soyad.trim() || !form.email.trim()) {
+    showFeedback("error", t("booking.validationError") || "Lütfen tüm zorunlu alanları ve tarihleri doldurun.");
+    return;
+  }
+
+  showFeedback("loading", t("booking.submitting"));
+
+
     fetch(import.meta.env.VITE_SHEETY_RESERVATIONS, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         reservation: {
-          checkIn: checkIn.toISOString().split("T")[0],
-          checkOut: checkOut.toISOString().split("T")[0],
+          checkIn: checkIn?.toISOString().split("T")[0],
+          checkOut: checkOut?.toISOString().split("T")[0],
           ...form
         }
       })
@@ -89,14 +98,18 @@ export default function BookingPage() {
         if (!res.ok) throw new Error();
         return res.json();
       })
-      .then(() => showFeedback("success", t("booking.alertSuccess")))
+      .then(() => {
+        showFeedback("success", t("booking.alertSuccess"));
+        setForm({ ad: "", soyad: "", email: "", telefon: "", notlar: "" });
+        setRange([null, null]);
+      })
       .catch(() => showFeedback("error", t("booking.alertError")));
   };
 
   const localeCode = i18n.language === "en" ? "en-US" : "tr";
 
   return (
-    <div id="rezervasyon" className="booking-page-wrapper max-w-5xl mx-auto p-6 space-y-12">
+    <div id="rezervasyon" className="booking-page-wrapper max-w-full mx-auto p-4 sm:p-6 space-y-12">
       {feedback && (
         <div className="feedback-overlay">
           {feedback.type === "loading" && <Loader className="spinner" />}
@@ -106,7 +119,7 @@ export default function BookingPage() {
 
       {/* Takvim */}
       <section className="relative booking-glass">
-        <div className="glass-container p-8">
+        <div className="glass-container p-8 w-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto">
           <h2 className="text-2xl font-semibold">{t("booking.calendarTitle")}</h2>
           <Calendar
             selectRange
@@ -135,11 +148,11 @@ export default function BookingPage() {
 
       {/* Form */}
       <section className="relative booking-glass">
-        <div className="glass-container overflow-hidden">
+        <div className="glass-container overflow-hidden w-full max-w-md md:max-w-3xl lg:max-w-5xl p-8 mx-auto">
           <div className="bg-teal-600 text-white py-4 px-6">
             <h2 className="text-xl font-semibold">{t("booking.formTitle")}</h2>
           </div>
-          <div className="p-8">
+          <div>
             <div className="booking-info mb-6">
               <h3 className="text-lg font-bold mb-2">{t("booking.datesTitle")}</h3>
               <p>
@@ -156,7 +169,7 @@ export default function BookingPage() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8 w-full">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   { name: "ad", icon: User, placeholder: t("booking.firstName"), required: true },

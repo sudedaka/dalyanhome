@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "./LanguageSwitcher";
+
 
 const Header = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -57,12 +57,14 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Mobile Hamburger */}
-        <button
-          className={`md:hidden ${scrolled ? "text-gray-700" : "text-white"}`}
-          onClick={() => setOpen((prev) => !prev)}
-        >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+      <button
+      aria-label={open ? "Close menu" : "Open menu"}
+      className={`md:hidden p-3 rounded ${scrolled ? "text-gray-700" : "text-white"}`}
+      onClick={() => setOpen((prev) => !prev)}
+    >
+      {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+    </button>
+
 
         {/* Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2 text-center pointer-events-none">
@@ -110,7 +112,20 @@ const Header = () => {
           >
             {t("reservation")}
           </a>
-          <LanguageSwitcher scrolled={scrolled} />
+          <div className="hidden md:block">
+          <button
+            onClick={() => {
+              const newLang = i18n.language === "tr" ? "en" : "tr";
+              i18n.changeLanguage(newLang);
+            }}
+            className={`text-sm font-medium transition ${
+              scrolled ? "text-teal-600 hover:text-teal-700" : "text-white hover:text-teal-200"
+            }`}
+          >
+            {i18n.language === "tr" ? "EN" : "TR"}
+          </button>
+        </div>
+
         </div>
       </div>
 
@@ -153,6 +168,19 @@ const Header = () => {
               >
                 {t("reservation")}
               </button>
+
+              {/* DİL DEĞİŞTİRME (MOBİL) */}
+              <div className="mt-4">
+                <button
+                  onClick={() => {
+                    const newLang = i18n.language === "tr" ? "en" : "tr";
+                    i18n.changeLanguage(newLang);
+                  }}
+                  className="text-sm text-gray-700 hover:text-teal-600 font-medium"
+                >
+                  {i18n.language === "tr" ? "EN" : "TR"}
+                </button>
+              </div>
             </div>
           </motion.div>
         )}

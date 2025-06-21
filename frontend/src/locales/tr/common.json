@@ -187,6 +187,8 @@
     "submitButton":  "Rezervasyon Talebi Gönder",
     "submitting": "Rezervasyon gönderiliyor…",
     "alertSuccess":  "Rezervasyon talebiniz iletildi. Teşekkürler!",
-    "alertError":    "Rezervasyon gönderilirken bir hata oluştu."
+    "alertError":    "Rezervasyon gönderilirken bir hata oluştu.",
+    "validationError": "Lütfen tüm zorunlu alanları ve tarihleri doldurun."
+
   }
 }
