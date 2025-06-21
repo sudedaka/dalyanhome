@@ -42,6 +42,13 @@ const Header = () => {
     }
   `;
 
+  const mobileNavItems = [
+    { id: "anasayfa", labelKey: "home" },
+    { id: "galeri", labelKey: "gallery.nav" },
+    { id: "bilgi", labelKey: "information" },
+    { id: "iletisim", labelKey: "contact" },
+  ];
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -118,14 +125,14 @@ const Header = () => {
             className="md:hidden overflow-hidden bg-white shadow-md"
           >
             <div className="flex flex-col items-center space-y-4 py-6">
-              {["home", "gallery", "information", "contact"].map((key) => (
+              {mobileNavItems.map(({ id, labelKey }) => (
                 <a
-                  key={key}
-                  href={`#${key === "home" ? "anasayfa" : key}`}
+                  key={id}
+                  href={`#${id}`}
                   className="text-lg font-medium text-gray-700 hover:text-teal-600"
                   onClick={() => setOpen(false)}
                 >
-                  {t(key)}
+                  {t(labelKey)}
                 </a>
               ))}
               <a
