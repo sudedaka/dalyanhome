@@ -13,6 +13,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
       const sections = ["anasayfa", "galeri", "bilgi", "iletisim", "rezervasyon"];
       for (let id of sections) {
         const el = document.getElementById(id);
@@ -36,8 +37,7 @@ const Header = () => {
     hover:text-teal-400
     ${
       activeSection === id
-        ? "after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 " +
-          "after:w-5 after:h-1 after:bg-teal-600 after:rounded-full"
+        ? "after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-5 after:h-1 after:bg-teal-600 after:rounded-full"
         : ""
     }
   `;
@@ -58,13 +58,13 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Mobile Hamburger */}
         <button
-          className={scrolled ? "text-gray-700 md:hidden" : "text-white md:hidden"}
-          onClick={() => setOpen((o) => !o)}
+          className={`md:hidden ${scrolled ? "text-gray-700" : "text-white"}`}
+          onClick={() => setOpen((prev) => !prev)}
         >
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
 
-        {/* Logo Center */}
+        {/* Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2 text-center pointer-events-none">
           <span
             className={`text-3xl font-bold tracking-wide font-savate ${
@@ -82,7 +82,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Desktop Nav Links */}
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#anasayfa" className={navLinkClass("anasayfa")}>
             {t("home")}
@@ -98,7 +98,7 @@ const Header = () => {
           </a>
         </nav>
 
-        {/* Reservation Button & Language */}
+        {/* Desktop Reservation + Language */}
         <div className="hidden md:flex items-center space-x-6">
           <a
             href="#rezervasyon"
@@ -126,22 +126,33 @@ const Header = () => {
           >
             <div className="flex flex-col items-center space-y-4 py-6">
               {mobileNavItems.map(({ id, labelKey }) => (
-                <a
+                <button
                   key={id}
-                  href={`#${id}`}
-                  className="text-lg font-medium text-gray-700 hover:text-teal-600"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    setTimeout(() => {
+                      const el = document.getElementById(id);
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }, 250);
+                  }}
+                  className="text-lg font-medium text-gray-700 hover:text-teal-600 px-4 py-2 w-full text-center"
                 >
                   {t(labelKey)}
-                </a>
+                </button>
               ))}
-              <a
-                href="#rezervasyon"
+
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  setTimeout(() => {
+                    const target = document.getElementById("rezervasyon");
+                    if (target) target.scrollIntoView({ behavior: "smooth" });
+                  }, 300);
+                }}
                 className="mt-4 px-6 py-2 bg-teal-600 text-white rounded-full font-medium hover:bg-teal-700 transition"
-                onClick={() => setOpen(false)}
               >
                 {t("reservation")}
-              </a>
+              </button>
             </div>
           </motion.div>
         )}
