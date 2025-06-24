@@ -74,7 +74,7 @@ export default function BookingPage() {
 
   const [checkIn, checkOut] = range;
 
-  // ❗ Tarih ve zorunlu alan kontrolü
+
   if (!checkIn || !checkOut || !form.ad.trim() || !form.soyad.trim() || !form.email.trim()) {
     showFeedback("error", t("booking.validationError") || "Lütfen tüm zorunlu alanları ve tarihleri doldurun.");
     return;
