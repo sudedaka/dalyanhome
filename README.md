@@ -20,6 +20,8 @@ Bu proje, kişisel mülküm olan Dalyan’daki evimin tanıtımı amacıyla geli
 - **Lucide Icons** – Hafif ve modern ikon seti
 - **React Calendar** – Takvim bileşeni
 
+-Sude Teslime Daka tarafından yapılmıştır.
+
 ## Kurulum
 
 Projeyi yerel ortamda çalıştırmak için:
