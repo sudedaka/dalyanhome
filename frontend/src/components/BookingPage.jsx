@@ -6,7 +6,7 @@ import {
   User,
   Mail,
   Phone,
-  Loader
+  Loader,
 } from "lucide-react";
 import "react-calendar/dist/Calendar.css";
 import "./BookingPage.css";
@@ -26,46 +26,42 @@ export default function BookingPage() {
     soyad: "",
     email: "",
     telefon: "",
-    notlar: ""
+    notlar: "",
   });
 
   const [feedback, setFeedback] = useState(null);
 
-useEffect(() => {
-  fetch(import.meta.env.VITE_SHEETY_BLOCKED)
-    .then(res => res.json())
-    .then(data => {
-      // Tarih parse fonksiyonu (Sheet'teki tarih formatı "7/12/2025" gibi MM/DD/YYYY olabilir)
-      const parseDate = (str) => {
-        // Eğer tarih string ise Date yap
-        // Sheety bazen tarihleri "7/12/2025" formatında string olarak döner
-        return new Date(str);
-      };
+  useEffect(() => {
+    fetch(import.meta.env.VITE_SHEETY_BLOCKED)
+      .then((res) => res.json())
+      .then((data) => {
+        // Tarih parse fonksiyonu, format: "7/12/2025" (MM/DD/YYYY)
+        const parseDate = (str) => {
+          if (!str) return null;
+          const [month, day, year] = str.split("/");
+          return new Date(year, month - 1, day);
+        };
 
-      const blockedRanges = data.blockedDays || []; // Sheety'den gelen verideki dizi ismini kontrol et
+        const blockedRanges = data.blockedDays || [];
 
-      let allBlockedDates = [];
+        let allBlockedDates = [];
 
-      blockedRanges.forEach(item => {
-        // Sheet kolon isimlerini burada doğru yazmalısın
-        const start = parseDate(item["Giriş Tarihi"] || item.girisTarihi);
-        const end = parseDate(item["Çıkış Tarihi"] || item.cikisTarihi);
+        blockedRanges.forEach((item) => {
+          const start = parseDate(item["girişTarihi"]);
+          const end = parseDate(item["çıkışTarihi"]);
 
-        if (!start || !end || isNaN(start) || isNaN(end)) return; // geçerli tarih değilse atla
+          if (!start || !end || isNaN(start) || isNaN(end)) return;
 
-        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-          allBlockedDates.push(new Date(d));
-        }
-      });
+          for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+            allBlockedDates.push(new Date(d));
+          }
+        });
 
-      console.log("Blocked dates:", allBlockedDates);
-      setBlockedDates(allBlockedDates);
-    })
-    .catch(console.error);
-}, []);
+        setBlockedDates(allBlockedDates);
+      })
+      .catch(console.error);
+  }, []);
 
-
-  // Aynı günü karşılaştırmak için fonksiyon
   const isSameDay = (d1, d2) =>
     d1 &&
     d2 &&
@@ -74,7 +70,7 @@ useEffect(() => {
     d1.getDate() === d2.getDate();
 
   const tileDisabled = ({ date, view }) =>
-    view === "month" && blockedDates.some(d => isSameDay(d, date));
+    view === "month" && blockedDates.some((d) => isSameDay(d, date));
 
   const tileClassName = ({ date, view }) => {
     if (view !== "month") return "";
@@ -92,7 +88,7 @@ useEffect(() => {
 
     if (start && end && date > start && date < end) return "in-range";
 
-    if (blockedDates.some(d => isSameDay(d, date))) return "unavailable";
+    if (blockedDates.some((d) => isSameDay(d, date))) return "unavailable";
 
     return "available";
   };
@@ -102,7 +98,7 @@ useEffect(() => {
     setTimeout(() => setFeedback(null), 3000);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const [checkIn, checkOut] = range;
@@ -116,7 +112,8 @@ useEffect(() => {
     ) {
       showFeedback(
         "error",
-        t("booking.validationError") || "Lütfen tüm zorunlu alanları ve tarihleri doldurun."
+        t("booking.validationError") ||
+          "Lütfen tüm zorunlu alanları ve tarihleri doldurun."
       );
       return;
     }
@@ -130,11 +127,11 @@ useEffect(() => {
         reservation: {
           checkIn: checkIn.toISOString().split("T")[0],
           checkOut: checkOut.toISOString().split("T")[0],
-          ...form
-        }
-      })
+          ...form,
+        },
+      }),
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();
       })
@@ -160,14 +157,13 @@ useEffect(() => {
         </div>
       )}
 
-      {/* Takvim */}
       <section className="relative booking-glass">
         <div className="glass-container p-8 w-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto">
           <h2 className="text-2xl font-semibold">{t("booking.calendarTitle")}</h2>
           <Calendar
             selectRange
             locale={localeCode}
-            onChange={value => {
+            onChange={(value) => {
               if (!Array.isArray(value)) {
                 setRange([value, null]);
                 setHoverDate(null);
@@ -189,77 +185,89 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Form */}
-      <section className="relative booking-glass">
-        <div className="glass-container overflow-hidden w-full max-w-md md:max-w-3xl lg:max-w-5xl p-8 mx-auto">
-          <div className="bg-teal-600 text-white py-4 px-6">
-            <h2 className="text-xl font-semibold">{t("booking.formTitle")}</h2>
+      <section className="booking-form glass-container max-w-md md:max-w-3xl lg:max-w-5xl mx-auto p-8">
+        <h2 className="text-2xl font-semibold mb-6">{t("booking.formTitle")}</h2>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="form-group">
+            <label htmlFor="ad">{t("booking.firstName")}</label>
+            <input
+              id="ad"
+              name="ad"
+              type="text"
+              placeholder={t("booking.firstNamePlaceholder")}
+              value={form.ad}
+              onChange={(e) => setForm({ ...form, ad: e.target.value })}
+              required
+              autoComplete="given-name"
+              className="input"
+            />
           </div>
-          <div>
-            <div className="booking-info mb-6">
-              <h3 className="text-lg font-bold mb-2">{t("booking.datesTitle")}</h3>
-              <p>
-                <span className="font-bold">{t("booking.checkIn")}:</span>{" "}
-                <span className="font-medium">
-                  {range[0] ? range[0].toLocaleDateString(localeCode) : "--------"}
-                </span>
-              </p>
-              <p>
-                <span className="font-bold">{t("booking.checkOut")}:</span>{" "}
-                <span className="font-medium">
-                  {range[1] ? range[1].toLocaleDateString(localeCode) : "--------"}
-                </span>
-              </p>
-            </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8 w-full">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  { name: "ad", icon: User, placeholder: t("booking.firstName"), required: true },
-                  { name: "soyad", icon: User, placeholder: t("booking.lastName"), required: true },
-                  { name: "email", icon: Mail, placeholder: t("booking.email"), required: true },
-                  { name: "telefon", icon: Phone, placeholder: t("booking.phone"), required: false }
-                ].map(({ name, icon: Icon, placeholder, required }) => (
-                  <div className="relative" key={name}>
-                    <Icon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <input
-                      name={name}
-                      type={name === "email" ? "email" : "text"}
-                      placeholder={placeholder}
-                      value={form[name]}
-                      onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
-                      required={required}
-                      className="w-full pl-10 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400"
-                    />
-                  </div>
-                ))}
-              </div>
-
-              <div>
-                <label className="block text-sm font-bold mb-1">
-                  {t("booking.notesLabel")}
-                </label>
-                <textarea
-                  name="notlar"
-                  rows={4}
-                  placeholder={t("booking.notesPlaceholder")}
-                  value={form.notlar}
-                  onChange={e => setForm(f => ({ ...f, notlar: e.target.value }))}
-                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400"
-                />
-              </div>
-
-              <p className="text-sm text-gray-500">{t("booking.formInfo")}</p>
-
-              <button
-                type="submit"
-                className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 shadow-md transition-shadow"
-              >
-                {t("booking.submitButton")}
-              </button>
-            </form>
+          <div className="form-group">
+            <label htmlFor="soyad">{t("booking.lastName")}</label>
+            <input
+              id="soyad"
+              name="soyad"
+              type="text"
+              placeholder={t("booking.lastNamePlaceholder")}
+              value={form.soyad}
+              onChange={(e) => setForm({ ...form, soyad: e.target.value })}
+              required
+              autoComplete="family-name"
+              className="input"
+            />
           </div>
-        </div>
+
+          <div className="form-group">
+            <label htmlFor="email">{t("booking.email")}</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder={t("booking.emailPlaceholder")}
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+              autoComplete="email"
+              className="input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="telefon">{t("booking.phone")}</label>
+            <input
+              id="telefon"
+              name="telefon"
+              type="tel"
+              placeholder={t("booking.phonePlaceholder")}
+              value={form.telefon}
+              onChange={(e) => setForm({ ...form, telefon: e.target.value })}
+              autoComplete="tel"
+              className="input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="notlar">{t("booking.notes")}</label>
+            <textarea
+              id="notlar"
+              name="notlar"
+              placeholder={t("booking.notesPlaceholder")}
+              value={form.notlar}
+              onChange={(e) => setForm({ ...form, notlar: e.target.value })}
+              className="textarea"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="btn-primary"
+            disabled={feedback?.type === "loading"}
+          >
+            {t("booking.submit")}
+          </button>
+        </form>
       </section>
     </div>
   );
