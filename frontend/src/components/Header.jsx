@@ -73,14 +73,14 @@ const Header = () => {
               scrolled ? "text-teal-700" : "text-white"
             }`}
           >
-            DalyanHome
+            Villa Forest
           </span>
           <div
             className={`text-base font-oooh mt-0.5 ${
               scrolled ? "text-gray-500" : "text-white/80"
             }`}
           >
-            ● Muğla ●
+           Muğla ● Dalyan
           </div>
         </div>
 
