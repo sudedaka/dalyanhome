@@ -31,20 +31,39 @@ export default function BookingPage() {
 
   const [feedback, setFeedback] = useState(null);
 
-  useEffect(() => {
-    fetch(import.meta.env.VITE_SHEETY_BLOCKED)
-      .then(res => res.json())
-      .then(data => {
-        const parse = str => {
-          const [y, m, d] = str.split("-").map(Number);
-          return new Date(y, m - 1, d);
-        };
-        const parsedDates = (data.blockedDays || []).map(item => parse(item.date));
-        console.log("Blocked dates:", parsedDates); // Debug için
-        setBlockedDates(parsedDates);
-      })
-      .catch(console.error);
-  }, []);
+useEffect(() => {
+  fetch(import.meta.env.VITE_SHEETY_BLOCKED)
+    .then(res => res.json())
+    .then(data => {
+      // Tarih parse fonksiyonu (Sheet'teki tarih formatı "7/12/2025" gibi MM/DD/YYYY olabilir)
+      const parseDate = (str) => {
+        // Eğer tarih string ise Date yap
+        // Sheety bazen tarihleri "7/12/2025" formatında string olarak döner
+        return new Date(str);
+      };
+
+      const blockedRanges = data.blockedDays || []; // Sheety'den gelen verideki dizi ismini kontrol et
+
+      let allBlockedDates = [];
+
+      blockedRanges.forEach(item => {
+        // Sheet kolon isimlerini burada doğru yazmalısın
+        const start = parseDate(item["Giriş Tarihi"] || item.girisTarihi);
+        const end = parseDate(item["Çıkış Tarihi"] || item.cikisTarihi);
+
+        if (!start || !end || isNaN(start) || isNaN(end)) return; // geçerli tarih değilse atla
+
+        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+          allBlockedDates.push(new Date(d));
+        }
+      });
+
+      console.log("Blocked dates:", allBlockedDates);
+      setBlockedDates(allBlockedDates);
+    })
+    .catch(console.error);
+}, []);
+
 
   // Aynı günü karşılaştırmak için fonksiyon
   const isSameDay = (d1, d2) =>
