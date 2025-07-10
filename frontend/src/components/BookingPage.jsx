@@ -39,28 +39,42 @@ export default function BookingPage() {
           const [y, m, d] = str.split("-").map(Number);
           return new Date(y, m - 1, d);
         };
-        setBlockedDates((data.blockedDays || []).map(item => parse(item.date)));
+        const parsedDates = (data.blockedDays || []).map(item => parse(item.date));
+        console.log("Blocked dates:", parsedDates); // Debug için
+        setBlockedDates(parsedDates);
       })
       .catch(console.error);
   }, []);
 
+  // Aynı günü karşılaştırmak için fonksiyon
+  const isSameDay = (d1, d2) =>
+    d1 &&
+    d2 &&
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate();
+
   const tileDisabled = ({ date, view }) =>
-    view === "month" &&
-    blockedDates.some(d => d.toDateString() === date.toDateString());
+    view === "month" && blockedDates.some(d => isSameDay(d, date));
 
   const tileClassName = ({ date, view }) => {
     if (view !== "month") return "";
+
     const [start, end] = range;
-    const isStart = start && date.toDateString() === start.toDateString();
-    const isEnd = end && date.toDateString() === end.toDateString();
+    const isStart = isSameDay(date, start);
+    const isEnd = isSameDay(date, end);
+
     if (isStart || isEnd) return "selected";
+
     if (start && !end && hoverDate) {
       const [min, max] = start < hoverDate ? [start, hoverDate] : [hoverDate, start];
       if (date > min && date < max) return "in-range-hover";
     }
+
     if (start && end && date > start && date < end) return "in-range";
-    if (blockedDates.some(d => d.toDateString() === date.toDateString()))
-      return "unavailable";
+
+    if (blockedDates.some(d => isSameDay(d, date))) return "unavailable";
+
     return "available";
   };
 
@@ -70,26 +84,33 @@ export default function BookingPage() {
   };
 
   const handleSubmit = e => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const [checkIn, checkOut] = range;
+    const [checkIn, checkOut] = range;
 
+    if (
+      !checkIn ||
+      !checkOut ||
+      !form.ad.trim() ||
+      !form.soyad.trim() ||
+      !form.email.trim()
+    ) {
+      showFeedback(
+        "error",
+        t("booking.validationError") || "Lütfen tüm zorunlu alanları ve tarihleri doldurun."
+      );
+      return;
+    }
 
-  if (!checkIn || !checkOut || !form.ad.trim() || !form.soyad.trim() || !form.email.trim()) {
-    showFeedback("error", t("booking.validationError") || "Lütfen tüm zorunlu alanları ve tarihleri doldurun.");
-    return;
-  }
-
-  showFeedback("loading", t("booking.submitting"));
-
+    showFeedback("loading", t("booking.submitting"));
 
     fetch(import.meta.env.VITE_SHEETY_RESERVATIONS, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         reservation: {
-          checkIn: checkIn?.toISOString().split("T")[0],
-          checkOut: checkOut?.toISOString().split("T")[0],
+          checkIn: checkIn.toISOString().split("T")[0],
+          checkOut: checkOut.toISOString().split("T")[0],
           ...form
         }
       })
@@ -109,7 +130,10 @@ export default function BookingPage() {
   const localeCode = i18n.language === "en" ? "en-US" : "tr";
 
   return (
-    <div id="rezervasyon" className="booking-page-wrapper max-w-full mx-auto p-4 sm:p-6 space-y-12">
+    <div
+      id="rezervasyon"
+      className="booking-page-wrapper max-w-full mx-auto p-4 sm:p-6 space-y-12"
+    >
       {feedback && (
         <div className="feedback-overlay">
           {feedback.type === "loading" && <Loader className="spinner" />}
