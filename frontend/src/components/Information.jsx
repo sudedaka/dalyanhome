@@ -63,11 +63,11 @@ const Information = () => {
           variants={sectionVariants}
           className="space-y-6"
         >
-          <h2 className="text-center text-4xl md:text-5xl text-teal-800 tracking-wide font-medium relative">
+          <h2 className="text-center text-4xl md:text-5xl text-[#695843] tracking-wide font-medium relative">
             {t('info.sectionTitle')}
           </h2>
           {/* Alt çizgi */}
-          <div className="w-32 mx-auto mt-3 mb-8 border-b-4 border-teal-800 rounded-lg"></div>
+        <div className="w-32 mx-auto mt-3 mb-8 border-b-4 border-[#695843] rounded-lg"></div>
 
           {paragraphs.map((p, i) => (
             <p

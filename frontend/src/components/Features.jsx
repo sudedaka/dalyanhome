@@ -24,8 +24,17 @@ const Features = () => {
   const sectionTitle = t('features.sectionTitle');
   const items = t('features.items', { returnObjects: true });
 
+  const customColors = [
+    "#2d241d",   // doğada yürüyüş
+    "#fcd34d",   // yıldız
+    "#67e8f9",   // havuz keyfi
+    "#22c55e",   // yoga meditasyon
+    "#a5b4fc",   // kitap okuma
+    "#b91c1c"    // şömine
+  ];
+
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-[#f7f6f1]">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           {sectionTitle}
@@ -38,8 +47,9 @@ const Features = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
         >
-          {items.map(({ title, description, color }, idx) => {
+          {items.map(({ title, description }, idx) => {
             const Icon = iconMap[idx];
+            const color = customColors[idx];
             return (
               <motion.div
                 key={idx}
@@ -48,7 +58,7 @@ const Features = () => {
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Icon className={`${color} w-12 h-12 mb-4`} />
+                <Icon className="w-12 h-12 mb-4" style={{ color }} />
                 <h3 className="text-xl font-semibold mb-2">{title}</h3>
                 <p className="text-sm text-gray-600">{description}</p>
               </motion.div>
