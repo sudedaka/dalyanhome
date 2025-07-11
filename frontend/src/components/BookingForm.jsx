@@ -14,6 +14,8 @@ const [successMessage, setSuccessMessage] = React.useState("");
     checkOut: initialCheckOut || "",
     notes: ""
   });
+  
+
 
   const [loading, setLoading] = React.useState(false);
 
@@ -81,8 +83,8 @@ const [successMessage, setSuccessMessage] = React.useState("");
         lastName: "",
         email: "",
         phone: "",
-        checkIn: initialCheckIn || "",
-        checkOut: initialCheckOut || "",
+        checkIn: "",
+        checkOut: "",
         notes: ""
       });
     } catch (error) {
@@ -101,7 +103,7 @@ const [successMessage, setSuccessMessage] = React.useState("");
       <style>{`
         input::placeholder, textarea::placeholder {
           color: #806b4e;
-          opacity: 1;
+          opacity: 0.6;
         }
       `}</style>
 

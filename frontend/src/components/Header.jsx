@@ -73,7 +73,7 @@ const Header = () => {
               scrolled ? "text-teal-700" : "text-white"
             }`}
           >
-            Villa Forest
+            Villa Han
           </span>
           <div
             className={`text-base font-oooh mt-0.5 ${
