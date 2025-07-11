@@ -55,13 +55,14 @@ const Hero = () => {
         </motion.p>
 
         {/* Rezervasyon Butonu - mobil ve desktop için görünür */}
-        <a
+            <a
           href="#rezervasyon"
           className="inline-block rounded-full bg-white/30 backdrop-blur-md px-6 py-2 sm:px-10 sm:py-3 text-white/90 font-semibold shadow-lg hover:bg-white/50 transition duration-300 text-base sm:text-lg"
-          aria-label="Rezervasyon"
+          aria-label={t("reservation")}
         >
-          Rezervasyon
+          {t("reservation")}
         </a>
+
       </div>
 
       {/* Scroll to Explore */}
