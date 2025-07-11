@@ -1,4 +1,4 @@
-# 🌿 DalyanHome – Kişisel Mülk Web Sitesi
+# 🌿 Villa Han – Kişisel Mülk Web Sitesi
 
 Bu proje, kişisel mülküm olan Dalyan’daki evimin tanıtımı amacıyla geliştirilmiş, modern ve duyarlı (responsive) bir web sitesidir. Ziyaretçilere ev hakkında bilgi edinme, galeri görüntüleme ve rezervasyon yapma imkânı sunar.
 
@@ -19,8 +19,6 @@ Bu proje, kişisel mülküm olan Dalyan’daki evimin tanıtımı amacıyla geli
 - **i18next** – Çoklu dil desteği
 - **Lucide Icons** – Hafif ve modern ikon seti
 - **React Calendar** – Takvim bileşeni
-
--Sude Teslime Daka tarafından yapılmıştır.
 
 ## Kurulum
 
