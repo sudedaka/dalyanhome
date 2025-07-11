@@ -251,26 +251,36 @@ const [successMessage, setSuccessMessage] = React.useState("");
             disabled={loading}
           />
         </label>
-
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-4 rounded-xl text-lg font-bold shadow-lg transition-all duration-500 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed"
+          className="
+            w-full
+            py-3 sm:py-4             /* mobilde daha az padding */
+            rounded-lg sm:rounded-xl
+            text-base sm:text-lg     /* mobilde biraz daha küçük yazı */
+            font-bold shadow-lg
+            transition-all duration-500 ease-in-out
+            disabled:opacity-60 disabled:cursor-not-allowed
+          "
           style={{
             background: "linear-gradient(to right, #806b4e, #6f5a3f, #554839)",
             color: "#ffffff",
             backgroundSize: "200% 100%",
             backgroundPosition: "left center",
           }}
-          onMouseEnter={e => {
+          onMouseEnter={(e) => {
             if (!loading) e.currentTarget.style.backgroundPosition = "right center";
           }}
-          onMouseLeave={e => {
+          onMouseLeave={(e) => {
             if (!loading) e.currentTarget.style.backgroundPosition = "left center";
           }}
         >
-          {loading ? t("booking.submitting") || "Gönderiliyor..." : t("booking.submitButton")}
+          {loading
+            ? t("booking.submitting") || "Gönderiliyor..."
+            : t("booking.submitButton")}
         </button>
+
             {successMessage && (
         <div className="success-message" style={{ color: "green", marginBottom: "1rem" }}>
           {successMessage}

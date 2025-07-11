@@ -1,24 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  BedDouble,
-  BedSingle,
-  UtensilsCrossed,
-  Wifi,
-  Film,
-  Car,
-  Thermometer,
-  Droplets,
-  Flame,
-  Armchair,
-  MapPin,
-  Plane,
-  Compass,
-  Waves,
-  Info,
-  AlertTriangle,
-  CheckCircle,
-  Users,
+  BedDouble, BedSingle, UtensilsCrossed, Wifi, Film, Car, Thermometer,
+  Droplets, Flame, Armchair, MapPin, Plane, Compass, Waves,
+  Info, AlertTriangle, CheckCircle, Users
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -29,7 +14,6 @@ const sectionVariants = {
 
 const Information = () => {
   const { t } = useTranslation();
-
   const paragraphs = t('info.paragraphs', { returnObjects: true });
   const kitchenItems = t('info.kitchen.items', { returnObjects: true });
   const amenities = t('info.amenities', { returnObjects: true });
@@ -38,209 +22,123 @@ const Information = () => {
   const notes = t('info.notes.items', { returnObjects: true });
 
   return (
-    <section
-      id="bilgi"
-      className="py-20 px-4 md:px-10 font-serif text-lg leading-relaxed"
-    >
-      <div className="relative max-w-5xl mx-auto bg-white/20 backdrop-blur-2xl border border-teal-500/40 shadow-2xl rounded-[2rem] p-10 space-y-16">
+    <section id="bilgi" className="py-20 px-4 md:px-10 font-serif text-lg leading-relaxed">
+      <div className="relative max-w-5xl mx-auto bg-white/30 backdrop-blur-3xl ring-1 ring-white/40 shadow-[0_10px_60px_rgba(0,0,0,0.1)] rounded-[2rem] p-10 space-y-16">
         <img
           src="/bird.jpeg"
-          alt="Dal görseli"
-          className="absolute top-[-60px] right-[-30px] w-[150px] md:w-[200px] lg:w-[250px] h-auto z-30"
+          alt="Kuş"
+          className="absolute top-[-40px] right-[-20px] sm:top-[-50px] sm:right-[-25px] md:top-[-60px] md:right-[-30px] w-[150px] sm:w-[180px] md:w-[200px] lg:w-[250px] h-auto z-30"
         />
-
         <img
           src="/sakura.png"
-          alt="Dal görseli"
-          className="absolute top-[-140px] left-[-35px] w-[150px] md:w-[200px] lg:w-[250px] h-auto z-30"
+          alt="Dal"
+          className="absolute top-[-100px] left-[-20px] sm:top-[-120px] sm:left-[-30px] md:top-[-140px] md:left-[-35px] w-[150px] sm:w-[180px] md:w-[200px] lg:w-[250px] h-auto z-30"
         />
 
-        {/* Tanıtım Açıklama */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="space-y-6"
-        >
-          <h2 className="text-center text-4xl md:text-5xl text-[#695843] tracking-wide font-medium relative">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="space-y-6 text-center">
+          <h2 className="text-4xl md:text-5xl text-[#695843] font-semibold tracking-wide">
             {t('info.sectionTitle')}
           </h2>
-          {/* Alt çizgi */}
-        <div className="w-32 mx-auto mt-3 mb-8 border-b-4 border-[#695843] rounded-lg"></div>
-
+          <div className="w-24 mx-auto border-b-4 border-[#695843] rounded-lg"></div>
           {paragraphs.map((p, i) => (
-            <p
-              key={i}
-              className="text-slate-700 font-light text-[17px] leading-7 max-w-3xl mx-auto px-2 md:px-0"
-            >
+            <p key={i} className="text-slate-700 font-light text-[17px] leading-7 max-w-3xl mx-auto px-2 md:px-0">
               {p}
             </p>
           ))}
         </motion.div>
 
-        {/* Odalar */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          <div className="flex items-start space-x-4">
-            <BedDouble className="w-8 h-8 text-teal-600" />
-            <div>
-              <h3 className="text-2xl text-teal-700 font-medium">
-                {t('info.rooms.parent.title')}
-              </h3>
-              <p className="text-slate-600 font-light">
-                {t('info.rooms.parent.desc')}
-              </p>
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[{
+            icon: <BedDouble className="w-8 h-8 text-teal-600" />,
+            title: t('info.rooms.parent.title'),
+            desc: t('info.rooms.parent.desc')
+          }, {
+            icon: <BedSingle className="w-8 h-8 text-teal-600" />,
+            title: t('info.rooms.child.title'),
+            desc: t('info.rooms.child.desc')
+          }].map(({ icon, title, desc }, idx) => (
+            <div key={idx} className="bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md hover:shadow-lg transition-all">
+              <div className="flex items-start space-x-4">
+                <div className="p-2 bg-white/80 rounded-full shadow">{icon}</div>
+                <div>
+                  <h3 className="text-xl text-teal-700 font-semibold">{title}</h3>
+                  <p className="text-slate-600 text-sm font-light">{desc}</p>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
+        </motion.div>
+
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md">
           <div className="flex items-start space-x-4">
-            <BedSingle className="w-8 h-8 text-teal-600" />
+            <div className="p-2 bg-white/80 rounded-full shadow">
+              <UtensilsCrossed className="w-8 h-8 text-teal-600" />
+            </div>
             <div>
-              <h3 className="text-2xl text-teal-700 font-medium">
-                {t('info.rooms.child.title')}
-              </h3>
-              <p className="text-slate-600 font-light">
-                {t('info.rooms.child.desc')}
-              </p>
+              <h3 className="text-xl text-teal-700 font-semibold mb-1">{t('info.kitchen.title')}</h3>
+              <ul className="list-disc list-inside text-slate-700 text-sm font-light space-y-1">
+                {kitchenItems.map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
             </div>
           </div>
         </motion.div>
 
-        {/* Mutfak */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="flex items-start space-x-6"
-        >
-          <UtensilsCrossed className="w-8 h-8 text-teal-600" />
-          <div>
-            <h3 className="text-2xl text-teal-700 font-medium">
-              {t('info.kitchen.title')}
-            </h3>
-            <ul className="list-disc list-inside text-slate-700 font-light space-y-1">
-              {kitchenItems.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        </motion.div>
-
-        {/* Olanaklar */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-6"
-        >
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {amenities.map((label, i) => {
-            const Icon = [
-              Wifi,
-              Film,
-              Car,
-              Thermometer,
-              MapPin,
-              CheckCircle,
-              Users,
-              Droplets,
-              Flame,
-              Armchair,
-            ][i];
+            const Icon = [Wifi, Film, Car, Thermometer, MapPin, CheckCircle, Users, Droplets, Flame, Armchair][i];
             return (
-              <div
-                key={i}
-                className="flex flex-col items-center text-center space-y-2"
-              >
-                <Icon className="w-10 h-10 text-teal-600" />
-                <span className="text-slate-700 font-light">{label}</span>
+              <div key={i} className="flex flex-col items-center text-center space-y-2 group">
+                <div className="p-3 bg-white/70 rounded-full shadow-md group-hover:scale-110 transition-transform">
+                  <Icon className="w-8 h-8 text-teal-600" />
+                </div>
+                <span className="text-slate-700 font-light text-sm">{label}</span>
               </div>
             );
           })}
         </motion.div>
 
-        {/* Konum & Aktiviteler */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          <div>
-            <h3 className="text-2xl text-teal-700 font-medium mb-2">
-              {t('info.location.title')}
+        {/* Konum ve Aktiviteler */}
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md">
+            <h3 className="text-xl text-teal-700 font-semibold mb-4 flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-teal-600" /> {t('info.location.title')}
             </h3>
-            <ul className="list-disc list-inside text-slate-700 font-light space-y-1">
+            <ul className="space-y-3">
               {Object.values(distances).map((d, i) => (
-                <li key={i} className="flex items-center">
-                  {i === 4 ? (
-                    <Plane className="w-5 h-5 text-teal-600 mr-2" />
-                  ) : (
-                    <MapPin className="w-5 h-5 text-teal-600 mr-2" />
-                  )}
-                  {d}
+                <li key={i} className="flex items-center gap-2 text-sm text-slate-700">
+                  {i === 4 ? <Plane className="w-5 h-5 text-teal-600" /> : <MapPin className="w-5 h-5 text-teal-600" />} {d}
                 </li>
               ))}
             </ul>
           </div>
-          <div>
-            <h3 className="text-2xl text-teal-700 font-medium mb-2">
-              {t('info.activities.title')}
+          <div className="bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md">
+            <h3 className="text-xl text-teal-700 font-semibold mb-4 flex items-center gap-2">
+              <Compass className="w-5 h-5 text-teal-600" /> {t('info.activities.title')}
             </h3>
-            <ul className="list-disc list-inside text-slate-700 font-light space-y-1">
+            <ul className="space-y-3">
               {activities.map((act, i) => (
-                <li key={i} className="flex items-center">
-                  <Compass className="w-5 h-5 text-teal-600 mr-2" />
-                  {act}
+                <li key={i} className="flex items-center gap-2 text-sm text-slate-700">
+                  <Compass className="w-5 h-5 text-teal-600" /> {act}
                 </li>
               ))}
             </ul>
           </div>
         </motion.div>
 
-        {/* Havuz */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="flex items-center space-x-4"
-        >
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="flex items-center space-x-4 bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md">
           <Waves className="w-10 h-10 text-teal-500" />
           <div>
-            <h3 className="text-2xl text-teal-700 font-medium">
-              {t('info.pool.title')}
-            </h3>
-            <p className="text-slate-600 font-light">{t('info.pool.desc')}</p>
+            <h3 className="text-xl text-teal-700 font-semibold">{t('info.pool.title')}</h3>
+            <p className="text-slate-600 text-sm font-light">{t('info.pool.desc')}</p>
           </div>
         </motion.div>
 
-        {/* Notlar */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="space-y-3"
-        >
-          <h3 className="text-2xl text-teal-700 font-medium">
-            {t('info.notes.title')}
-          </h3>
-          <ul className="list-disc list-inside text-slate-700 font-light space-y-1">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="space-y-3">
+          <h3 className="text-xl text-teal-700 font-semibold">{t('info.notes.title')}</h3>
+          <ul className="space-y-2 text-slate-700 text-sm font-light">
             {notes.map((note, i) => (
               <li key={i} className="flex items-center">
-                {i < 1 ? (
-                  <Info className="w-5 h-5 text-teal-600 mr-2" />
-                ) : (
-                  <AlertTriangle className="w-5 h-5 text-red-500 mr-2" />
-                )}
+                {i < 1 ? <Info className="w-5 h-5 text-teal-600 mr-2" /> : <AlertTriangle className="w-5 h-5 text-red-500 mr-2" />}
                 {note}
               </li>
             ))}

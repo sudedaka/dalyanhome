@@ -1,13 +1,22 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Star, Droplet, Sunrise, BookOpen, Flame } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  MapPin,
+  Star,
+  Droplet,
+  Sunrise,
+  BookOpen,
+  Flame,
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const iconMap = [MapPin, Star, Droplet, Sunrise, BookOpen, Flame];
 
 const containerVariants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.2 } },
+  show: {
+    transition: { staggerChildren: 0.25 },
+  },
 };
 
 const cardVariants = {
@@ -15,37 +24,49 @@ const cardVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', bounce: 0.3, duration: 0.8 },
+    transition: { type: "spring", stiffness: 100, damping: 15 },
+  },
+};
+
+const iconVariants = {
+  bounce: {
+    y: [0, -10, 0],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      repeatType: "loop",
+      ease: "easeInOut",
+    },
   },
 };
 
 const Features = () => {
   const { t } = useTranslation();
-  const sectionTitle = t('features.sectionTitle');
-  const items = t('features.items', { returnObjects: true });
+  const sectionTitle = t("features.sectionTitle");
+  const items = t("features.items", { returnObjects: true });
 
   const customColors = [
-    "#2d241d",   // doğada yürüyüş
-    "#fcd34d",   // yıldız
-    "#67e8f9",   // havuz keyfi
-    "#22c55e",   // yoga meditasyon
-    "#a5b4fc",   // kitap okuma
-    "#b91c1c"    // şömine
+    "#2d241d", // doğada yürüyüş
+    "#fcd34d", // yıldız
+    "#67e8f9", // havuz keyfi
+    "#22c55e", // yoga meditasyon
+    "#a5b4fc", // kitap okuma
+    "#b91c1c", // şömine
   ];
 
   return (
-    <section className="py-16 bg-[#f7f6f1]">
+    <section className="py-20 bg-gradient-to-br from-white to-gray-100">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 className="text-4xl md:text-5xl font-serif font-bold text-center mb-16 text-gray-800 tracking-wide">
           {sectionTitle}
         </h2>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.4 }}
         >
           {items.map(({ title, description }, idx) => {
             const Icon = iconMap[idx];
@@ -53,14 +74,25 @@ const Features = () => {
             return (
               <motion.div
                 key={idx}
-                className="bg-white rounded-2xl p-6 h-56 flex flex-col items-center text-center shadow-lg cursor-pointer"
+                className="bg-white rounded-3xl p-8 shadow-xl flex flex-col items-center text-center cursor-pointer
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 ease-in-out"
                 variants={cardVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.98 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Icon className="w-12 h-12 mb-4" style={{ color }} />
-                <h3 className="text-xl font-semibold mb-2">{title}</h3>
-                <p className="text-sm text-gray-600">{description}</p>
+                <motion.div
+                  className="mb-6"
+                  style={{ color }}
+                  variants={iconVariants}
+                  animate="bounce"
+                >
+                  <Icon className="w-16 h-16" />
+                </motion.div>
+                <h3 className="text-2xl font-semibold mb-3 font-serif text-gray-900">
+                  {title}
+                </h3>
+                <p className="text-gray-600 text-base leading-relaxed max-w-[280px]">
+                  {description}
+                </p>
               </motion.div>
             );
           })}
