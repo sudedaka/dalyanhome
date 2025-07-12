@@ -8,15 +8,17 @@ import Footer from "./components/Footer";
 import BookingPage from "./components/BookingPage";
 function App() {
   return (
-    <div className="scroll-smooth">
+    <div className="overflow-x-hidden scroll-smooth">
       <Header />
-      <Hero/>
-      <Features/>
-      <Gallery/>
-      <Information/>
-      <BookingPage/>
-      <Footer/>
- 
+      <Hero /> 
+      
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8">
+        <Features />
+        <Gallery />
+        <Information />
+        <BookingPage />
+        <Footer />
+      </div>
     </div>
   );
 }

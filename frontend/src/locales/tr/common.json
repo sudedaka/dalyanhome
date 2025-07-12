@@ -104,7 +104,7 @@
       "title": "Muğla’da Yapabilecekleriniz",
       "items": [
         "Su Dalışı",
-        "Dalyan Çamur Banyosu ve Sıcak Su Kaynakları",
+        "Dalyan Çamur Banyosu",
         "Kano Turu",
         "Antik Kentleri Gezmek",
         "Likya Yolu’nda Trekking",
@@ -114,9 +114,15 @@
         "Ölüdeniz’de Yamaç Paraşütü"
       ]
     },
-    "pool": {
+      "pool": {
       "title": "Havuz Özellikleri",
-      "desc": "8×4 m boyutlarında, 1.55 m derinliğinde ve çocuk havuzu dahil olmak üzere kapsamlı yüzme imkânı. Çevrede 4 adet şezlong ve geniş şemsiyeler bulunmaktadır."
+      "features": [
+        "8×4 m boyutlarında.",
+        "1.55 m derinliğinde.",
+        "Çocuk havuzu dahildir.",
+        "4 adet şezlong bulunmaktadır.",
+        "Geniş şemsiyeler mevcuttur."
+      ]
     },
     "notes": {
       "title": "Önemli Notlar",

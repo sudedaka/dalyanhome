@@ -114,10 +114,16 @@
         "Paragliding in Ölüdeniz"
       ]
     },
-    "pool": {
-      "title": "Pool Features",
-      "desc": "An 8×4 m pool with a depth of 1.55 m including a children’s section. Four sun loungers and large umbrellas available."
-    },
+        "pool": {
+        "title": "Pool Features",
+        "features": [
+          "Dimensions: 8×4 meters.",
+          "Depth: 1.55 meters.",
+          "Includes a children's pool.",
+          "Equipped with 4 sun loungers.",
+          "Large sun umbrellas available."
+        ]
+      },
     "notes": {
       "title": "Important Notes",
       "items": [
@@ -155,7 +161,7 @@
         "activitiesTitle": "Activities",
         "activities": [
           "Scuba Diving",
-          "Mud Bath & Thermal Springs",
+          "Mud Bath",
           "Boat Tours",
           "Trekking on the Lycian Way",
           "Paragliding in Ölüdeniz"

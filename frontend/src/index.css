@@ -3,7 +3,22 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      font-family: 'Manrope', sans-serif;
+      overflow-x: hidden;
+    }
+      h1, h2, h3 {
+    font-family: 'Quattrocento', serif;
+  }
+
+  .logo {
+    font-family: 'Oooh Baby', cursive;
   }
 }
+
+

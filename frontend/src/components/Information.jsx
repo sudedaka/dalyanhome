@@ -5,6 +5,7 @@ import {
   Droplets, Flame, Armchair, MapPin, Plane, Compass, Waves,
   Info, AlertTriangle, CheckCircle, Users
 } from 'lucide-react';
+
 import { useTranslation } from 'react-i18next';
 
 const sectionVariants = {
@@ -20,6 +21,7 @@ const Information = () => {
   const distances = t('info.location.distances', { returnObjects: true });
   const activities = t('info.activities.items', { returnObjects: true });
   const notes = t('info.notes.items', { returnObjects: true });
+  const poolFeatures = t('info.pool.features', { returnObjects: true });
 
   return (
     <section id="bilgi" className="py-20 px-4 md:px-10 font-serif text-lg leading-relaxed">
@@ -100,9 +102,10 @@ const Information = () => {
         {/* Konum ve Aktiviteler */}
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md">
-            <h3 className="text-xl text-teal-700 font-semibold mb-4 flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-teal-600" /> {t('info.location.title')}
-            </h3>
+         <h3 className="text-xl text-teal-700 font-semibold mb-4">
+          {t('info.location.title')}
+        </h3>
+
             <ul className="space-y-3">
               {Object.values(distances).map((d, i) => (
                 <li key={i} className="flex items-center gap-2 text-sm text-slate-700">
@@ -112,9 +115,9 @@ const Information = () => {
             </ul>
           </div>
           <div className="bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md">
-            <h3 className="text-xl text-teal-700 font-semibold mb-4 flex items-center gap-2">
-              <Compass className="w-5 h-5 text-teal-600" /> {t('info.activities.title')}
-            </h3>
+       <h3 className="text-xl text-teal-700 font-semibold mb-4">
+        {t('info.activities.title')}
+      </h3>
             <ul className="space-y-3">
               {activities.map((act, i) => (
                 <li key={i} className="flex items-center gap-2 text-sm text-slate-700">
@@ -125,25 +128,45 @@ const Information = () => {
           </div>
         </motion.div>
 
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="flex items-center space-x-4 bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md">
-          <Waves className="w-10 h-10 text-teal-500" />
-          <div>
-            <h3 className="text-xl text-teal-700 font-semibold">{t('info.pool.title')}</h3>
-            <p className="text-slate-600 text-sm font-light">{t('info.pool.desc')}</p>
-          </div>
-        </motion.div>
+       <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={sectionVariants}
+        className="bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md"
+      >
+        <h3 className="text-xl text-teal-700 font-semibold mb-4 flex items-center gap-2">
+          <Waves className="w-6 h-6 text-teal-500" />
+          {t('info.pool.title')}
+        </h3>
+        <ul className="space-y-2 pl-2 text-slate-700 text-sm font-light">
+          {poolFeatures.map((feature, i) => (
+            <li key={i} className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-teal-500" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
 
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="space-y-3">
-          <h3 className="text-xl text-teal-700 font-semibold">{t('info.notes.title')}</h3>
-          <ul className="space-y-2 text-slate-700 text-sm font-light">
-            {notes.map((note, i) => (
-              <li key={i} className="flex items-center">
-                {i < 1 ? <Info className="w-5 h-5 text-teal-600 mr-2" /> : <AlertTriangle className="w-5 h-5 text-red-500 mr-2" />}
-                {note}
-              </li>
-            ))}
-          </ul>
-        </motion.div>
+     <motion.div
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      variants={sectionVariants}
+      className="bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-md space-y-3"
+    >
+      <h3 className="text-xl text-teal-700 font-semibold">{t('info.notes.title')}</h3>
+      <ul className="space-y-2 text-slate-700 text-sm font-light">
+        {notes.map((note, i) => (
+          <li key={i} className="flex items-center">
+            {i < 1 ? <Info className="w-5 h-5 text-teal-600 mr-2" /> : <AlertTriangle className="w-5 h-5 text-red-500 mr-2" />}
+            {note}
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+
       </div>
     </section>
   );
