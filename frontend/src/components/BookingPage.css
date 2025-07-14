@@ -1,20 +1,17 @@
-/* BookingPage.css */
 
-/* Genel sayfa düzeni - biraz daha aşağı ve geniş */
 .booking-page-wrapper {
-  max-width: 1400px;        /* 1200'den 1400'e genişlettik */
-  margin: 6rem auto 3rem;   /* margin-top 3rem'den 6rem'e çıktı, sayfa aşağı kayar */
-  padding: 2rem 1.5rem;     /* yatay padding biraz artırıldı */
+  max-width: 1400px;        
+  margin: 6rem auto 3rem;   
+  padding: 2rem 1.5rem;     
   font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f7f6f1;
   color: #222;
 }
 
-/* Cam efektli konteyner genişliği de arttı */
 .booking-glass {
   max-width: 1000px;       /* 900'den 1000px'e çıktı */
   margin: 0 auto;
-  padding: 3rem 2.5rem;    /* biraz daha iç boşluk artırıldı */
+  padding: 3rem 2.5rem;    
   background: rgba(255, 255, 255, 0.20); /* 0.12 -> 0.4 veya 0.6 */
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -128,7 +125,7 @@
   background-color: rgba(105, 88, 67, 0.12); /* hover için */
   color: #695843;
 }
-/* Seçili gün - kendi stilinle override et */
+
 .react-calendar__tile.selected,
 .react-calendar__tile.selected:focus,
 .react-calendar__tile--active {

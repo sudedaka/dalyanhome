@@ -7,6 +7,9 @@ import BookingForm from "./BookingForm";
 import { useTranslation } from "react-i18next";
 import useIsMobile from "../hooks/useIsMobile";
 
+import { ref, onValue } from "firebase/database";
+import { database } from "../firebase";
+
 export default function BookingPage() {
   const { t, i18n } = useTranslation();
   const isMobile = useIsMobile();
@@ -20,17 +23,13 @@ export default function BookingPage() {
     checkOut: "",
   });
 
-  // Geçerli tarih kontrolü
   const isValidDate = (d) => d instanceof Date && !isNaN(d);
 
-  // Tarih parse fonksiyonu, format fark etmeksizin local saat 00:00 olarak oluşturuyor
   const parseDate = (str) => {
     if (!str) return null;
-
     str = str.trim();
 
     if (str.includes(".")) {
-      // Gün.Ay.Yıl formatı
       const [day, month, year] = str.split(".");
       if (!day || !month || !year) return null;
       const date = new Date(Number(year), Number(month) - 1, Number(day));
@@ -38,7 +37,6 @@ export default function BookingPage() {
     }
 
     if (str.includes("/")) {
-      // Ay/Gün/Yıl formatı
       const [month, day, year] = str.split("/");
       if (!day || !month || !year) return null;
       const date = new Date(Number(year), Number(month) - 1, Number(day));
@@ -46,7 +44,6 @@ export default function BookingPage() {
     }
 
     if (str.includes("-")) {
-      // ISO format yyyy-mm-dd
       const [year, month, day] = str.split("-");
       if (!day || !month || !year) return null;
       const date = new Date(Number(year), Number(month) - 1, Number(day));
@@ -57,30 +54,30 @@ export default function BookingPage() {
   };
 
   useEffect(() => {
-       fetch(import.meta.env.VITE_SHEETY_BLOCKED_DAYS)
-      .then((res) => res.json())
-      .then((data) => {
-        const blockedRanges = data.blockedDays || [];
-        let allBlockedDates = [];
+    const blockedDaysRef = ref(database, "blockedDays");
 
-        blockedRanges.forEach((item) => {
-          const start = parseDate(item["girisTarihi"]);
-          const end = parseDate(item["cikisTarihi"]);
+    const unsubscribe = onValue(blockedDaysRef, (snapshot) => {
+      const data = snapshot.val();
+      const blockedDaysArray = data ? Object.values(data) : [];
+      let allBlockedDates = [];
 
-          if (!start || !end) return;
+      blockedDaysArray.forEach((item) => {
+        const start = parseDate(item.girisTarihi);
+        const end = parseDate(item.cikisTarihi);
 
-          // start ve end dahil tüm günleri blockedDates içine ekle
-          for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-            allBlockedDates.push(new Date(d));
-          }
-        });
+        if (!start || !end) return;
 
-        setBlockedDates(allBlockedDates);
-      })
-      .catch(console.error);
+        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+          allBlockedDates.push(new Date(d));
+        }
+      });
+
+      setBlockedDates(allBlockedDates);
+    });
+
+    return () => unsubscribe();
   }, [i18n.language]);
 
-  // İki tarihi aynı gün olarak kontrol et
   const isSameDay = (d1, d2) =>
     d1 &&
     d2 &&
@@ -88,11 +85,9 @@ export default function BookingPage() {
     d1.getMonth() === d2.getMonth() &&
     d1.getDate() === d2.getDate();
 
-  // Takvimde engellenmiş günleri seçilemez yap
   const tileDisabled = ({ date, view }) =>
     view === "month" && blockedDates.some((d) => isSameDay(d, date));
 
-  // Takvimde seçilen ve engellenmiş günler için class ataması
   const tileClassName = ({ date, view }) => {
     if (view !== "month") return "";
 
@@ -116,7 +111,6 @@ export default function BookingPage() {
 
   const localeCode = i18n.language === "en" ? "en-US" : "tr";
 
-  // Tarihi yyyy-mm-dd formatına çevir
   const formatDate = (date) => {
     const d = new Date(date);
     const year = d.getFullYear();
@@ -125,7 +119,6 @@ export default function BookingPage() {
     return `${year}-${month}-${day}`;
   };
 
-  // Takvimde tarih aralığı değiştiğinde formu güncelle
   const onRangeChange = (value) => {
     setRange(value);
 
@@ -153,7 +146,6 @@ export default function BookingPage() {
     >
       <section className="relative booking-glass">
         <div className="glass-container p-8 w-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto">
-          {/* Görseller */}
           <img
             src="/pink-flower.png"
             alt="Pembe çiçek"
