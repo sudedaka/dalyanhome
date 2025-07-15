@@ -47,7 +47,7 @@ export default function BookingPage() {
   };
 
   useEffect(() => {
-    const blockedDaysRef = ref(database, "/");
+    const blockedDaysRef = ref(database, "/reservations");
     const unsubscribe = onValue(blockedDaysRef, (snapshot) => {
       const data = snapshot.val();
       const blockedDaysArray = data ? Object.values(data) : [];
