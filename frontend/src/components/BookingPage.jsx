@@ -17,11 +17,7 @@ export default function BookingPage() {
   const [blockedDates, setBlockedDates] = useState([]);
   const [range, setRange] = useState([null, null]);
   const [hoverDate, setHoverDate] = useState(null);
-
-  const [formDates, setFormDates] = useState({
-    checkIn: "",
-    checkOut: "",
-  });
+  const [formDates, setFormDates] = useState({ checkIn: "", checkOut: "" });
 
   const isValidDate = (d) => d instanceof Date && !isNaN(d);
 
@@ -35,27 +31,23 @@ export default function BookingPage() {
       const date = new Date(Number(year), Number(month) - 1, Number(day));
       return isValidDate(date) ? date : null;
     }
-
     if (str.includes("/")) {
       const [month, day, year] = str.split("/");
       if (!day || !month || !year) return null;
       const date = new Date(Number(year), Number(month) - 1, Number(day));
       return isValidDate(date) ? date : null;
     }
-
     if (str.includes("-")) {
       const [year, month, day] = str.split("-");
       if (!day || !month || !year) return null;
       const date = new Date(Number(year), Number(month) - 1, Number(day));
       return isValidDate(date) ? date : null;
     }
-
     return null;
   };
 
   useEffect(() => {
-    const blockedDaysRef = ref(database, "blockedDays");
-
+    const blockedDaysRef = ref(database, "/");
     const unsubscribe = onValue(blockedDaysRef, (snapshot) => {
       const data = snapshot.val();
       const blockedDaysArray = data ? Object.values(data) : [];
@@ -64,7 +56,6 @@ export default function BookingPage() {
       blockedDaysArray.forEach((item) => {
         const start = parseDate(item.girisTarihi);
         const end = parseDate(item.cikisTarihi);
-
         if (!start || !end) return;
 
         for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
@@ -140,10 +131,7 @@ export default function BookingPage() {
   };
 
   return (
-    <div
-      id="rezervasyon"
-      className="booking-page-wrapper max-w-full mx-auto p-4 sm:p-6 space-y-12"
-    >
+    <div id="rezervasyon" className="booking-page-wrapper max-w-full mx-auto p-4 sm:p-6 space-y-12">
       <section className="relative booking-glass">
         <div className="glass-container p-8 w-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto">
           <img
@@ -174,10 +162,7 @@ export default function BookingPage() {
             prev2Label={null}
           />
 
-          <BookingForm
-            initialCheckIn={formDates.checkIn}
-            initialCheckOut={formDates.checkOut}
-          />
+          <BookingForm initialCheckIn={formDates.checkIn} initialCheckOut={formDates.checkOut} />
         </div>
       </section>
     </div>
