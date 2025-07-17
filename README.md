@@ -9,7 +9,7 @@ Bu proje, kişisel mülküm olan Dalyan’daki evimin tanıtımı amacıyla geli
 - Türkçe ve İngilizce dil desteği
 - Mobil ve masaüstü uyumlu tasarım
 - Framer Motion ile yumuşak geçişli animasyonlar
-- Sheety API üzerinden rezervasyon verilerinin Google Sheets’e kaydedilmesi
+- Firebase Realtime Database ile rezervasyon verilerinin yönetimi
 
 ## Kullanılan Teknolojiler
 
@@ -19,14 +19,19 @@ Bu proje, kişisel mülküm olan Dalyan’daki evimin tanıtımı amacıyla geli
 - **i18next** – Çoklu dil desteği
 - **Lucide Icons** – Hafif ve modern ikon seti
 - **React Calendar** – Takvim bileşeni
+- **Firebase Realtime Database** – Rezervasyon verilerinin gerçek zamanlı yönetimi
+
+© 2025 VillaHan. Tüm hakları saklıdır.
+
+*Developed by Sude Teslime Daka.*
 
 ## Kurulum
 
 Projeyi yerel ortamda çalıştırmak için:
 
 ```bash
-git clone https://github.com/kullaniciadi/dalyanhome.git
-cd dalyanhome
+git clone https://github.com/sudedaka/VillaHan.git
+cd frontend
 npm install
 npm run dev
 
