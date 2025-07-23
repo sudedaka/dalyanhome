@@ -87,7 +87,7 @@ const Information = () => {
 
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {amenities.map((label, i) => {
-            const Icon = [Wifi, Film, Car, Thermometer, MapPin, CheckCircle, Users, Droplets, Flame, Armchair][i];
+          const Icon = [Wifi, Car, Thermometer, MapPin, CheckCircle, Users, Droplets, Flame, Armchair][i];
             return (
               <div key={i} className="flex flex-col items-center text-center space-y-2 group">
                 <div className="p-3 bg-white/70 rounded-full shadow-md group-hover:scale-110 transition-transform">

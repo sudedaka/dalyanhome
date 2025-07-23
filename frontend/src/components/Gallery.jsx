@@ -3,16 +3,17 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const categorizedMedia = {
-  garden: [
-    { type: 'video', src: 'video.mp4' },
+   garden: [
+    { type: 'video', src: 'gallery1.mp4' },
     { type: 'image', src: 'garden1.png' },
     { type: 'image', src: 'garden2.png' },
     { type: 'image', src: 'garden3.jpeg' },
     { type: 'image', src: 'garden4.jpeg' },
     { type: 'image', src: 'garden5.png' },
-    { type: 'image', src: 'garden6.png' },
-    { type: 'image', src: 'garden7.png' },
-    { type: 'image', src: 'garden8.png' },
+    { type: 'image', src: 'garden6.jpeg' },
+    { type: 'image', src: 'garden7.jpeg' },
+     { type: 'image', src: 'garden8.jpeg' },
+   
   ],
   livingRoom: [
     { type: 'image', src: 'living1.jpeg' },
@@ -20,6 +21,8 @@ const categorizedMedia = {
     { type: 'image', src: 'living3.jpeg' },
     { type: 'image', src: 'living4.jpeg' },
     { type: 'image', src: 'living5.jpeg' },
+    { type: 'image', src: 'living6.jpeg' },
+    { type: 'image', src: 'living7.jpeg' },
   ],
   kidsRoom: [
     { type: 'image', src: 'kids1.jpeg' },
@@ -85,7 +88,7 @@ const Gallery = () => {
           <div className="w-full h-80 md:h-96 lg:h-[500px] overflow-hidden rounded-lg">
             {currentMedia.type === 'video' ? (
               <video
-                src="/images/gallery/garden/gallery0.mp4"
+                src="/images/gallery/garden/gallery1.mp4"
                 className="w-full h-full object-cover"
                 controls
                 autoPlay
