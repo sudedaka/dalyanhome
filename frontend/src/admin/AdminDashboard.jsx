@@ -83,9 +83,31 @@ export default function AdminDashboard() {
     }).format(amount);
   }
 
+  // Tarih dönüşümü (dd.MM.yyyy -> Date)
+  function parseDate(str) {
+    if (!str) return new Date(0);
+    const [day, month, year] = str.split(".");
+    return new Date(+year, +month - 1, +day);
+  }
+
+  // Biten rezervasyon kontrolü
+  function isPastReservation(cikisTarihi) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // sadece tarih karşılaştırması için
+    const endDate = parseDate(cikisTarihi);
+    return endDate < today;
+  }
+
+  // Rezervasyonları giriş tarihine göre sırala
+  const sortedBookings = Object.entries(bookings).sort(
+    ([, a], [, b]) => parseDate(a.girisTarihi) - parseDate(b.girisTarihi)
+  );
+
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center">Admin Paneli – Rezervasyonlar</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        Admin Paneli – Rezervasyonlar
+      </h1>
 
       {/* ------- FORM ------- */}
       <form
@@ -117,7 +139,11 @@ export default function AdminDashboard() {
               required={["musteriAdi", "girisTarihi", "cikisTarihi"].includes(
                 name
               )}
-              inputMode={["kapora", "kalan", "toplamUcret"].includes(name) ? "numeric" : "text"}
+              inputMode={
+                ["kapora", "kalan", "toplamUcret"].includes(name)
+                  ? "numeric"
+                  : "text"
+              }
             />
           </div>
         ))}
@@ -171,45 +197,49 @@ export default function AdminDashboard() {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(bookings).map(([id, r]) => (
-              <tr key={id} className="hover:bg-gray-50">
-                <td className="border p-2 whitespace-nowrap text-sm">
-                  {r.musteriAdi}
-                </td>
-                <td className="border p-2 whitespace-nowrap text-sm">
-                  {r.girisTarihi}
-                </td>
-                <td className="border p-2 whitespace-nowrap text-sm">
-                  {r.cikisTarihi}
-                </td>
-                <td className="border p-2 whitespace-nowrap text-sm">
-                  {formatTL(r.kapora)}
-                </td>
-                <td className="border p-2 whitespace-nowrap text-sm">
-                  {formatTL(r.kalan)}
-                </td>
-                <td className="border p-2 whitespace-nowrap text-sm">
-                  {formatTL(r.toplamUcret)}
-                </td>
-                <td className="border p-2 max-w-xs truncate text-sm">
-                  {r.notlar}
-                </td>
-                <td className="border p-2 space-x-2 whitespace-nowrap">
-                  <button
-                    onClick={() => handleEdit(id)}
-                    className="bg-yellow-400 px-3 py-1 rounded text-sm"
-                  >
-                    Düzenle
-                  </button>
-                  <button
-                    onClick={() => handleDelete(id)}
-                    className="bg-red-600 text-white px-3 py-1 rounded text-sm"
-                  >
-                    Sil
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {sortedBookings.map(([id, r]) => {
+              const isPast = isPastReservation(r.cikisTarihi);
+              const rowClass = isPast ? "line-through text-gray-400" : "";
+              return (
+                <tr key={id} className={`hover:bg-gray-50 ${rowClass}`}>
+                  <td className="border p-2 whitespace-nowrap text-sm">
+                    {r.musteriAdi}
+                  </td>
+                  <td className="border p-2 whitespace-nowrap text-sm">
+                    {r.girisTarihi}
+                  </td>
+                  <td className="border p-2 whitespace-nowrap text-sm">
+                    {r.cikisTarihi}
+                  </td>
+                  <td className="border p-2 whitespace-nowrap text-sm">
+                    {formatTL(r.kapora)}
+                  </td>
+                  <td className="border p-2 whitespace-nowrap text-sm">
+                    {formatTL(r.kalan)}
+                  </td>
+                  <td className="border p-2 whitespace-nowrap text-sm">
+                    {formatTL(r.toplamUcret)}
+                  </td>
+                  <td className="border p-2 max-w-xs truncate text-sm">
+                    {r.notlar}
+                  </td>
+                  <td className="border p-2 space-x-2 whitespace-nowrap">
+                    <button
+                      onClick={() => handleEdit(id)}
+                      className="bg-yellow-400 px-3 py-1 rounded text-sm"
+                    >
+                      Düzenle
+                    </button>
+                    <button
+                      onClick={() => handleDelete(id)}
+                      className="bg-red-600 text-white px-3 py-1 rounded text-sm"
+                    >
+                      Sil
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
             {Object.keys(bookings).length === 0 && (
               <tr>
                 <td
